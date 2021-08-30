@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Text, StyleSheet, View} from 'react-native';
-import {HeaderComponent} from '../../components/Besar';
+import {BannerSlider, HeaderComponent} from '../../components/Besar';
 import {colors} from '../../utils';
 
 export default class Home extends Component {
@@ -8,6 +8,7 @@ export default class Home extends Component {
     return (
       <View style={styles.page}>
         <HeaderComponent />
+        <BannerSlider />
       </View>
     );
   }

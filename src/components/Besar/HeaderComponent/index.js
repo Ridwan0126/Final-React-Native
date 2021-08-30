@@ -22,7 +22,7 @@ export default class HeaderComponent extends Component {
 }
 
 const styles = StyleSheet.create({
-  conatiner: {backgroundColor: colors.primary, height: responsiveHeight(125)},
+  conatiner: {backgroundColor: colors.primary, height: responsiveHeight(130)},
   input: {fontSize: 16, fontFamily: fonts.primary.regular},
   Cari: {
     flex: 1,
