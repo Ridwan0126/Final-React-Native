@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "909283010164",
+    "firebase_url": "https://clonewa-ff96b-default-rtdb.firebaseio.com",
+    "project_id": "clonewa-ff96b",
+    "storage_bucket": "clonewa-ff96b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:909283010164:android:00a47e613b3eae11299321",
+        "android_client_info": {
+          "package_name": "com.finalnative"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "909283010164-es9cr2ioe0364cs9kiakbpk583aachvr.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.finalnative",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "909283010164-tht3liva9rvdhkr5nceuimjvft0pblin.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyADaaCs-WxcVVxDx2nG62CyxEoleixQydg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "909283010164-tht3liva9rvdhkr5nceuimjvft0pblin.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
