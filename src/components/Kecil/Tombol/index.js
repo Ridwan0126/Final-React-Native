@@ -2,12 +2,15 @@ import React from 'react';
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {Kembali, Keranjang} from '../../../assets/Icons';
 import {colors} from '../../../utils';
+import TextIcon from './TextIcon';
 import TextOnly from './TextOnly';
 
 const Tombol = props => {
   const Icon = () => {
     if (icon === 'Keranjang') {
       return <Keranjang />;
+    } else if (icon === 'Kembali') {
+      return <Kembali />;
     }
     return <Keranjang />;
   };
@@ -16,8 +19,8 @@ const Tombol = props => {
 
   if (type === 'text') {
     return <TextOnly {...props} />;
-  } else if (icon === 'arrow-left') {
-    return <Kembali />;
+  } else if (type === 'textIcon') {
+    return <TextIcon {...props} />;
   }
 
   return (

@@ -27,6 +27,9 @@ export const dummyProduct = [
     jenisHotel: 'Romance',
     kamar: ['Family', 'Single', 'Romance', 'Vloger', 'Bisnis'],
     ready: true,
+    lokasi: 'Denpasar, Nusa Dua',
+    tentang:
+      'Hotel Kami Memiliki Fasilitas Yang Tidak Kalah Bagus Dari Hotel Lainnya, Antara lain: Kolam Renang, Pemandian Air Panas,, Meeting Rooms, Family rooms, Park, Dll. Jika Anda Tertarik Dengan Hotel Kami Silahkan Anda Berkunjung, Kami Menanti Kedatangan Anda',
   },
   {
     id: 2,
@@ -42,6 +45,9 @@ export const dummyProduct = [
     jenisHotel: 'Familly',
     kamar: ['Family', 'Single', 'Romance', 'Vloger', 'Bisnis'],
     ready: true,
+    lokasi: 'Lembang',
+    tentang:
+      'Hotel Kami Memiliki Fasilitas Yang Tidak Kalah Bagus Dari Hotel Lainnya, Antara lain: Kolam Renang, Pemandian Air Panas,, Meeting Rooms, Family rooms, Park, Dll. Jika Anda Tertarik Dengan Hotel Kami Silahkan Anda Berkunjung, Kami Menanti Kedatangan Anda',
   },
   {
     id: 3,
@@ -57,6 +63,9 @@ export const dummyProduct = [
     jenisHotel: 'Syariah',
     kamar: ['Family', 'Single', 'Romance', 'Vloger', 'Bisnis'],
     ready: true,
+    lokasi: 'Jakarta Selatan',
+    tentang:
+      'Hotel Kami Memiliki Fasilitas Yang Tidak Kalah Bagus Dari Hotel Lainnya, Antara lain: Kolam Renang, Pemandian Air Panas,, Meeting Rooms, Family rooms, Park, Dll. Jika Anda Tertarik Dengan Hotel Kami Silahkan Anda Berkunjung, Kami Menanti Kedatangan Anda',
   },
   {
     id: 4,
@@ -72,6 +81,9 @@ export const dummyProduct = [
     jenisHotel: 'Vloger',
     kamar: ['Family', 'Single', 'Romance', 'Vloger', 'Bisnis'],
     ready: true,
+    lokasi: 'Jogjakarta',
+    tentang:
+      'Hotel Kami Memiliki Fasilitas Yang Tidak Kalah Bagus Dari Hotel Lainnya, Antara lain: Kolam Renang, Pemandian Air Panas,, Meeting Rooms, Family rooms, Park, Dll. Jika Anda Tertarik Dengan Hotel Kami Silahkan Anda Berkunjung, Kami Menanti Kedatangan Anda',
   },
   {
     id: 5,
@@ -87,5 +99,8 @@ export const dummyProduct = [
     jenisHotel: 'Culture',
     kamar: ['Family', 'Single', 'Romance', 'Vloger', 'Bisnis'],
     ready: true,
+    lokasi: 'Jakarta Pusat',
+    tentang:
+      'Hotel Kami Memiliki Fasilitas Yang Tidak Kalah Bagus Dari Hotel Lainnya, Antara lain: Kolam Renang, Pemandian Air Panas,, Meeting Rooms, Family rooms, Park, Dll. Jika Anda Tertarik Dengan Hotel Kami Silahkan Anda Berkunjung, Kami Menanti Kedatangan Anda',
   },
 ];
