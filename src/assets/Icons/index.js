@@ -6,6 +6,12 @@ import Profile01 from './Profile01.svg';
 import Profile02 from './Profile02.svg';
 import Search from './Search.svg';
 import Keranjang from './Keranjang.svg';
+import Password from './Password.svg';
+import Shoping from './Shoping.svg';
+import LogOut from './LogOut.svg';
+import PanahKanan from './PanahKanan.svg';
+import Profile from './Profile.svg';
+import Kembali from './Kembali.svg';
 
 export {
   Search,
@@ -16,4 +22,10 @@ export {
   Shop02,
   Profile01,
   Profile02,
+  Password,
+  Shoping,
+  LogOut,
+  PanahKanan,
+  Profile,
+  Kembali,
 };
