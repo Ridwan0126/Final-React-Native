@@ -34,7 +34,7 @@ export default class ListProduct extends Component {
           </View>
           <View style={styles.Product}>
             <Text style={styles.label}>Product</Text>
-            <ListProducts products={products} />
+            <ListProducts products={products} navigation={navigation} />
           </View>
           <Jarak height={85} />
         </ScrollView>
