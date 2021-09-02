@@ -2,10 +2,12 @@ import React from 'react';
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {colors, fonts} from '../../../utils';
 
-const TextOnly = ({tittle, padding, onPress}) => {
+const TextOnly = ({tittle, padding, fontSize, onPress}) => {
   return (
-    <TouchableOpacity onPress={onPress} style={styles.container(padding)}>
-      <Text style={styles.text}>{tittle}</Text>
+    <TouchableOpacity
+      onPress={onPress}
+      style={styles.container(padding, fontSize)}>
+      <Text style={styles.text(fontSize)}>{tittle}</Text>
     </TouchableOpacity>
   );
 };
@@ -13,15 +15,16 @@ const TextOnly = ({tittle, padding, onPress}) => {
 export default TextOnly;
 
 const styles = StyleSheet.create({
-  container: padding => ({
+  container: (padding, fontSize) => ({
     padding: padding,
     backgroundColor: colors.primary,
     borderRadius: 5,
   }),
-  text: {
+  fontSize: 20,
+  text: fontSize => ({
     color: colors.white,
     textAlign: 'center',
-    fontSize: 13,
+    fontSize: fontSize ? fontSize : 13,
     fontFamily: fonts.primary.bold,
-  },
+  }),
 });

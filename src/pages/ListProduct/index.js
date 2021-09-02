@@ -22,9 +22,10 @@ export default class ListProduct extends Component {
 
   render() {
     const {fitur, products} = this.state;
+    const {navigation} = this.props;
     return (
       <View style={styles.page}>
-        <HeaderComponent />
+        <HeaderComponent navigation={navigation} />
         <ScrollView
           showsVerticalScrollIndicator={false}
           style={styles.container}>

@@ -66,12 +66,7 @@ export default class ProductDetail extends Component {
               <Text style={styles.jenis}>{product.tentang}</Text>
             </View>
             <View style={styles.inpt}>
-              <Inputan
-                label="Jumlah"
-                width={responsiveWidth(366)}
-                height={responsiveHeight(43)}
-                fontSize={13}
-              />
+              <Inputan label="Jumlah" textareas fontSize={13} />
               <Pilihan
                 label="Kamar"
                 width={responsiveWidth(166)}

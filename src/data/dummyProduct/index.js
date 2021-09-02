@@ -27,6 +27,7 @@ export const dummyProduct = [
     jenisHotel: 'Romance',
     kamar: ['Family', 'Single', 'Romance', 'Vloger', 'Bisnis'],
     ready: true,
+    jumlah: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'],
     lokasi: 'Denpasar, Nusa Dua',
     tentang:
       'Hotel Kami Memiliki Fasilitas Yang Tidak Kalah Bagus Dari Hotel Lainnya, Antara lain: Kolam Renang, Pemandian Air Panas,, Meeting Rooms, Family rooms, Park, Dll. Jika Anda Tertarik Dengan Hotel Kami Silahkan Anda Berkunjung, Kami Menanti Kedatangan Anda',
@@ -45,6 +46,7 @@ export const dummyProduct = [
     jenisHotel: 'Familly',
     kamar: ['Family', 'Single', 'Romance', 'Vloger', 'Bisnis'],
     ready: true,
+    jumlah: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'],
     lokasi: 'Lembang',
     tentang:
       'Hotel Kami Memiliki Fasilitas Yang Tidak Kalah Bagus Dari Hotel Lainnya, Antara lain: Kolam Renang, Pemandian Air Panas,, Meeting Rooms, Family rooms, Park, Dll. Jika Anda Tertarik Dengan Hotel Kami Silahkan Anda Berkunjung, Kami Menanti Kedatangan Anda',
@@ -63,6 +65,7 @@ export const dummyProduct = [
     jenisHotel: 'Syariah',
     kamar: ['Family', 'Single', 'Romance', 'Vloger', 'Bisnis'],
     ready: true,
+    jumlah: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'],
     lokasi: 'Jakarta Selatan',
     tentang:
       'Hotel Kami Memiliki Fasilitas Yang Tidak Kalah Bagus Dari Hotel Lainnya, Antara lain: Kolam Renang, Pemandian Air Panas,, Meeting Rooms, Family rooms, Park, Dll. Jika Anda Tertarik Dengan Hotel Kami Silahkan Anda Berkunjung, Kami Menanti Kedatangan Anda',
@@ -81,6 +84,7 @@ export const dummyProduct = [
     jenisHotel: 'Vloger',
     kamar: ['Family', 'Single', 'Romance', 'Vloger', 'Bisnis'],
     ready: true,
+    jumlah: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'],
     lokasi: 'Jogjakarta',
     tentang:
       'Hotel Kami Memiliki Fasilitas Yang Tidak Kalah Bagus Dari Hotel Lainnya, Antara lain: Kolam Renang, Pemandian Air Panas,, Meeting Rooms, Family rooms, Park, Dll. Jika Anda Tertarik Dengan Hotel Kami Silahkan Anda Berkunjung, Kami Menanti Kedatangan Anda',
@@ -99,6 +103,7 @@ export const dummyProduct = [
     jenisHotel: 'Culture',
     kamar: ['Family', 'Single', 'Romance', 'Vloger', 'Bisnis'],
     ready: true,
+    jumlah: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'],
     lokasi: 'Jakarta Pusat',
     tentang:
       'Hotel Kami Memiliki Fasilitas Yang Tidak Kalah Bagus Dari Hotel Lainnya, Antara lain: Kolam Renang, Pemandian Air Panas,, Meeting Rooms, Family rooms, Park, Dll. Jika Anda Tertarik Dengan Hotel Kami Silahkan Anda Berkunjung, Kami Menanti Kedatangan Anda',

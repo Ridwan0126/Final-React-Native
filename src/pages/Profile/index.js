@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Text, StyleSheet, View, Image} from 'react-native';
+import {Text, StyleSheet, View, Image, StatusBar} from 'react-native';
 import {dummyMenu, dummyProfile} from '../../data';
 import {
   colors,
@@ -25,6 +25,7 @@ export default class Profile extends Component {
     const {profile, menus} = this.state;
     return (
       <View style={styles.container}>
+        <StatusBar backgroundColor="#0000E6" />
         <View style={styles.cont}>
           <Image source={profile.avatar} style={styles.foto} />
           <View style={styles.profile}>
@@ -34,7 +35,7 @@ export default class Profile extends Component {
               {profile.alamat},{profile.kota}
             </Text>
           </View>
-          <ListMenu menus={menus} />
+          <ListMenu menus={menus} navigation={this.props.navigation} />
         </View>
       </View>
     );

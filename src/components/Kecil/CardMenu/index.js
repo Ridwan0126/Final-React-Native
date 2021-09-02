@@ -3,9 +3,11 @@ import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {PanahKanan} from '../../../assets';
 import {colors, fonts, responsiveHeight} from '../../../utils';
 
-const CardMenu = ({menu}) => {
+const CardMenu = ({menu, navigation}) => {
   return (
-    <TouchableOpacity style={styles.container}>
+    <TouchableOpacity
+      style={styles.container}
+      onPress={() => navigation.navigate(menu.halaman)}>
       <View style={styles.menu}>
         {menu.gambar}
         <Text style={styles.text}>{menu.nama}</Text>

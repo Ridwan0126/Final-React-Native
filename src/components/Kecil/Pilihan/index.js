@@ -15,6 +15,7 @@ const Pilihan = ({label, datas, width, height, fontSize}) => {
           onValueChange={itemValue => {
             setSelectedValue(itemValue);
           }}>
+          <Picker.Item label="--Pilih--" value="" />
           {datas.map((item, idx) => {
             return <Picker.Item key={idx} label={item} value={item} />;
           })}

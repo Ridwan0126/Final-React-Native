@@ -5,5 +5,19 @@ import CardProduct from './CardProduct';
 import CardMenu from './CardMenu';
 import Inputan from './Inputan';
 import Pilihan from './Pilihan';
+import CardKeranjang from './CardKeranjang';
+import CardAlamat from './CardAlamat';
+import CardHistory from './CardHistory';
 
-export {Pilihan, Inputan, Tombol, Jarak, CardFitur, CardProduct, CardMenu};
+export {
+  CardHistory,
+  CardAlamat,
+  CardKeranjang,
+  Pilihan,
+  Inputan,
+  Tombol,
+  Jarak,
+  CardFitur,
+  CardProduct,
+  CardMenu,
+};

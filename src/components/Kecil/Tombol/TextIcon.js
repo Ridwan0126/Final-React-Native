@@ -1,6 +1,6 @@
 import React from 'react';
 import {StyleSheet, Text, TouchableOpacity} from 'react-native';
-import {Kembali, Keranjang} from '../../../assets/Icons';
+import {Kanan, Kembali, Keranjang, Kembali2} from '../../../assets/Icons';
 import {colors, fonts} from '../../../utils';
 import Jarak from '../Jarak';
 
@@ -12,7 +12,12 @@ const TextIcon = ({onPress, icon, padding, tittle, fontSize, disabled}) => {
       return <Kembali />;
     } else if (icon === 'KeranjangMasuk') {
       return <Keranjang />;
+    } else if (icon === 'submit') {
+      return <Kanan />;
+    } else if (icon === 'KembaliHitam') {
+      return <Kembali2 />;
     }
+
     return <Keranjang />;
   };
 

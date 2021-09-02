@@ -12,8 +12,18 @@ import LogOut from './LogOut.svg';
 import PanahKanan from './PanahKanan.svg';
 import Profile from './Profile.svg';
 import Kembali from './Kembali.svg';
+import Hapus from './Hapus.svg';
+import Kanan from './Kanan.svg';
+import Reg1 from './Reg01.svg';
+import Reg2 from './Reg02.svg';
+import Kembali2 from './Kembali2.svg';
 
 export {
+  Kembali2,
+  Reg1,
+  Reg2,
+  Kanan,
+  Hapus,
   Search,
   Keranjang,
   Home01,

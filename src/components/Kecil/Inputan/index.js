@@ -2,7 +2,18 @@ import React from 'react';
 import {StyleSheet, Text, TextInput, View} from 'react-native';
 import {colors, fonts} from '../../../utils';
 
-const Inputan = ({textarea, width, label, height, fontSize, placeholder}) => {
+const Inputan = ({
+  value,
+  textarea,
+  textareas,
+  width,
+  label,
+  height,
+  fontSize,
+  placeholder,
+  secureTextEntry,
+  keyboardType,
+}) => {
   if (textarea) {
     return (
       <View>
@@ -11,6 +22,19 @@ const Inputan = ({textarea, width, label, height, fontSize, placeholder}) => {
           style={styles.inputTextArea(fontSize)}
           multiline={true}
           numberOfLines={3}
+          value={value}
+        />
+      </View>
+    );
+  }
+  if (textareas) {
+    return (
+      <View style={styles.container}>
+        <Text style={styles.label(fontSize)}>{label} :</Text>
+        <TextInput
+          value={value}
+          style={styles.inputsss(width, height, fontSize)}
+          keyboardType={keyboardType}
         />
       </View>
     );
@@ -18,7 +42,12 @@ const Inputan = ({textarea, width, label, height, fontSize, placeholder}) => {
   return (
     <View style={styles.container}>
       <Text style={styles.label(fontSize)}>{label} :</Text>
-      <TextInput style={styles.input(width, height, fontSize)} />
+      <TextInput
+        secureTextEntry={secureTextEntry}
+        value={value}
+        style={styles.input(width, height, fontSize)}
+        keyboardType={keyboardType}
+      />
     </View>
   );
 };
@@ -34,8 +63,22 @@ const styles = StyleSheet.create({
     fontFamily: fonts.primary.regular,
   }),
   input: (fontSize, width, height) => ({
+    // width: 100,
+    // height: 30,
+    fontSize: fontSize ? fontSize : 18,
+    width: width,
+    height: height,
+    fontFamily: fonts.primary.regular,
+    borderWidth: 1,
+    borderRadius: 5,
+    borderColor: colors.border,
+    paddingVertical: 5,
+    paddingHorizontal: 10,
+  }),
+  inputsss: (fontSize, width, height) => ({
     width: 100,
     height: 30,
+    fontSize: fontSize ? fontSize : 18,
     fontFamily: fonts.primary.regular,
     borderWidth: 1,
     borderRadius: 5,

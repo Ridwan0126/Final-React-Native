@@ -26,7 +26,7 @@ export default class Home extends Component {
     // console.log('Nav', this.props.navigation);
     return (
       <View style={styles.page}>
-        <HeaderComponent />
+        <HeaderComponent navigation={navigation} />
         <ScrollView
           showsVerticalScrollIndicator={false}
           style={styles.container}>
