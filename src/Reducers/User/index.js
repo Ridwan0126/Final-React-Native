@@ -7,6 +7,7 @@ const initialState = {
 export default function (state = initialState, action) {
   switch (action.type) {
     case GET_USER:
+      console.log('Masuk Reducers', action);
       return {
         ...state,
         dataUser: action.payload,

@@ -4,6 +4,7 @@ import {Kanan, Kembali, Keranjang, Kembali2} from '../../../assets/Icons';
 import {colors} from '../../../utils';
 import TextIcon from './TextIcon';
 import TextOnly from './TextOnly';
+import TombolLoading from './TombolLoading';
 
 const Tombol = props => {
   const Icon = () => {
@@ -17,7 +18,11 @@ const Tombol = props => {
     return <Keranjang />;
   };
 
-  const {onPress, icon, totalKeranjang, padding, type, tittle} = props;
+  const {loading, onPress, icon, totalKeranjang, padding, type, tittle} = props;
+
+  if (loading) {
+    return <TombolLoading {...props} />;
+  }
 
   if (type === 'text') {
     return <TextOnly {...props} />;

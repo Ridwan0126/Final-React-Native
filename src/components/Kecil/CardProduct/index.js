@@ -20,6 +20,7 @@ const CardProduct = ({products, navigation}) => {
   );
 };
 
+
 export default CardProduct;
 
 const styles = StyleSheet.create({

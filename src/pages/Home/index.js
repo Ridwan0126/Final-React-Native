@@ -10,7 +10,7 @@ import {colors, fonts} from '../../utils';
 import {dummyFitur, dummyProduct} from '../../data';
 import {Jarak, Tombol} from '../../components';
 
-export default class Home extends Component {
+class Home extends Component {
   constructor(props) {
     super(props);
 
@@ -19,6 +19,8 @@ export default class Home extends Component {
       products: dummyProduct,
     };
   }
+
+  componentDidMount() {}
 
   render() {
     const {fitur, products} = this.state;
@@ -47,6 +49,8 @@ export default class Home extends Component {
     );
   }
 }
+
+export default Home;
 
 const styles = StyleSheet.create({
   page: {flex: 1, backgroundColor: colors.white},

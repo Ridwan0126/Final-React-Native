@@ -1,6 +1,6 @@
 import firestore from '@react-native-firebase/firestore';
 
-class Firebase {
+class FIREBASE {
   constructor() {
     this.dbVehicles = firestore().collection('users');
   }
@@ -10,4 +10,4 @@ class Firebase {
   addVehicle = vehicle => this.dbVehicles.add(vehicle);
 }
 
-export default Firebase;
+export default FIREBASE;
