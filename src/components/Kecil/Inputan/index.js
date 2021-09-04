@@ -14,6 +14,7 @@ const Inputan = ({
   secureTextEntry,
   keyboardType,
   onChangeText,
+  disabled,
 }) => {
   if (textarea) {
     return (
@@ -25,6 +26,7 @@ const Inputan = ({
           numberOfLines={3}
           value={value}
           onChangeText={onChangeText}
+          editable={disabled ? false : true}
         />
       </View>
     );
@@ -38,6 +40,7 @@ const Inputan = ({
           style={styles.inputsss(width, height, fontSize)}
           keyboardType={keyboardType}
           onChangeText={onChangeText}
+          editable={disabled ? false : true}
         />
       </View>
     );
@@ -51,6 +54,7 @@ const Inputan = ({
         style={styles.input(width, height, fontSize)}
         keyboardType={keyboardType}
         onChangeText={onChangeText}
+        editable={disabled ? false : true}
       />
     </View>
   );

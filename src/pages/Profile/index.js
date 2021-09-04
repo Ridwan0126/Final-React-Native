@@ -7,19 +7,46 @@ import {
   heightMobileUI,
   responsiveHeight,
   responsiveWidth,
+  getData,
 } from '../../utils';
 import {RFValue} from 'react-native-responsive-fontsize';
 import {ListMenu} from '../../components/Besar';
+import {Default} from '../../assets';
 
 export default class Profile extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      profile: dummyProfile,
+      profile: false,
       menus: dummyMenu,
     };
   }
+
+  componentDidMount() {
+    this._unsubscribe = this.props.navigation.addListener('focus', () => {
+      // console.log('Dioasang');
+      this.getUserData();
+    });
+  }
+
+  componentWillUnmount() {
+    this._unsubscribe();
+  }
+
+  getUserData = () => {
+    getData('user').then(res => {
+      const data = res;
+
+      if (data) {
+        this.setState({
+          profile: data,
+        });
+      } else {
+        this.props.navigation.replace('Login');
+      }
+    });
+  };
 
   render() {
     const {profile, menus} = this.state;
@@ -27,13 +54,14 @@ export default class Profile extends Component {
       <View style={styles.container}>
         <StatusBar backgroundColor="#0000E6" />
         <View style={styles.cont}>
-          <Image source={profile.avatar} style={styles.foto} />
+          <Image
+            source={profile.avatar ? {uri: profile.avatar} : Default}
+            style={styles.foto}
+          />
           <View style={styles.profile}>
             <Text style={styles.nama}>{profile.nama}</Text>
-            <Text style={styles.deskripsi}>{profile.nomerHp}</Text>
-            <Text style={styles.deskripsi}>
-              {profile.alamat},{profile.kota}
-            </Text>
+            <Text style={styles.deskripsi}>{profile.nohp}</Text>
+            <Text style={styles.deskripsi}>{profile.alamat}</Text>
           </View>
           <ListMenu menus={menus} navigation={this.props.navigation} />
         </View>
@@ -59,7 +87,7 @@ const styles = StyleSheet.create({
   foto: {
     width: responsiveWidth(150),
     height: responsiveHeight(150),
-    borderRadius: 40,
+    borderRadius: 150,
     alignSelf: 'center',
     marginTop: responsiveWidth(-75),
   },

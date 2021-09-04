@@ -7,23 +7,34 @@ import {
   ListProducts,
 } from '../../components/Besar';
 import {colors, fonts} from '../../utils';
-import {dummyFitur, dummyProduct} from '../../data';
+import {dummyProduct} from '../../data';
 import {Jarak, Tombol} from '../../components';
+import {connect} from 'react-redux';
+import {getListFitur} from '../../actions/FiturAction';
+// import { limitJersey } from '../../actions/JerseyAction'
 
 class Home extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      fitur: dummyFitur,
       products: dummyProduct,
     };
   }
 
-  componentDidMount() {}
+  componentDidMount() {
+    this._unsubscribe = this.props.navigation.addListener('focus', () => {
+      this.props.dispatch(getListFitur());
+      // this.props.dispatch(limitJersey());
+    });
+  }
+
+  componentWillUnmount() {
+    this._unsubscribe();
+  }
 
   render() {
-    const {fitur, products} = this.state;
+    const {products} = this.state;
     const {navigation} = this.props;
     // console.log('Nav', this.props.navigation);
     return (
@@ -36,7 +47,7 @@ class Home extends Component {
           <BannerSlider />
           <View style={styles.Fitur}>
             <Text style={styles.label}>Fitur</Text>
-            <ListFitur fitur={fitur} />
+            <ListFitur />
           </View>
           <View style={styles.Product}>
             <Text style={styles.label}>Product</Text>
@@ -50,7 +61,7 @@ class Home extends Component {
   }
 }
 
-export default Home;
+export default connect()(Home);
 
 const styles = StyleSheet.create({
   page: {flex: 1, backgroundColor: colors.white},
