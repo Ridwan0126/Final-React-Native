@@ -1,13 +1,16 @@
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {ActivityIndicator, StyleSheet, Text, View} from 'react-native';
 import {connect} from 'react-redux';
 import {CardFitur} from '../../Kecil';
+import {colors} from '../../../utils';
 
 const ListFitur = ({
   getListFiturLoading,
   getListFiturResult,
   getListFiturError,
+  navigation,
 }) => {
+  console.log('Data Fitur', getListFiturResult);
   return (
     <View style={styles.cont}>
       <View style={styles.container}>
@@ -19,19 +22,33 @@ const ListFitur = ({
             </View>
           );
         })} */}
-        {/* {getListLigaResult ? (
-        Object.keys(getListLigaResult).map((key) => {
-          return <CardLiga navigation={navigation} liga={getListLigaResult[key]} key={key} id={key} />;
-        })
-      ) : getListLigaLoading ? (
-        <View style={styles.loading}>
+        {getListFiturResult ? (
+          Object.keys(getListFiturResult).map(key => {
+            // console.log('key',key);
+            return (
+              <View>
+                <CardFitur
+                  navigation={navigation}
+                  fitur={getListFiturResult[key]}
+                  id={key}
+                  key={key}
+                />
+                <Text style={styles.text}>
+                  {getListFiturResult[key].namaFitur}
+                </Text>
+              </View>
+            );
+          })
+        ) : getListFiturLoading ? (
+          <View style={styles.loading}>
             <ActivityIndicator color={colors.primary} />
-        </View>
-      ) : getListLigaError ? (
-        <Text>{getListLigaError}</Text>
-      ) :(
-        <Text>Data Kosong</Text>
-      )} */}
+          </View>
+        ) : // )
+        getListFiturError ? (
+          <Text>{getListFiturError}</Text>
+        ) : (
+          <Text>Data Kosong</Text>
+        )}
       </View>
     </View>
   );
@@ -68,5 +85,10 @@ const styles = StyleSheet.create({
   text: {
     marginTop: 5,
     textAlign: 'center',
+  },
+  loading: {
+    flex: 1,
+    marginTop: 10,
+    marginBottom: 30,
   },
 });

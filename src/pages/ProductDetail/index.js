@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
-import {StyleSheet, View, Text} from 'react-native';
+import {StyleSheet, View, Text, Alert} from 'react-native';
 import {
   colors,
   fonts,
+  getData,
   heightMobileUI,
   numberWithCommas,
   responsiveHeight,
@@ -18,21 +19,68 @@ import {
   Jarak,
 } from '../../components';
 import {RFValue} from 'react-native-responsive-fontsize';
+import {connect} from 'react-redux';
+import {getDetailFitur} from '../../actions/FiturAction';
+import {masukKeranjang} from '../../actions/KeranjangAction';
 
-export default class ProductDetail extends Component {
+class ProductDetail extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      product: this.props.route.params.products,
-      images: this.props.route.params.products.gambar,
+      product: this.props.route.params.Product,
+      images: this.props.route.params.Product.gambar,
+      jumlah: '',
+      pilihan: '',
+      keterangan: '',
+      uid: '',
     };
   }
 
+  componentDidMount() {
+    const {product} = this.state;
+    this.props.dispatch(getDetailFitur(product.idProduct));
+  }
+
+  componentDidUpdate(prevProps) {
+    const {saveKeranjangResult} = this.props;
+
+    if (
+      saveKeranjangResult &&
+      prevProps.saveKeranjangResult !== saveKeranjangResult
+    ) {
+      this.props.navigation.navigate('Keranjang');
+    }
+  }
+
+  masukKeranjang = () => {
+    const {jumlah, keterangan, pilihan} = this.state;
+    getData('user').then(res => {
+      if (res) {
+        //ambil user uid simpan di state
+        this.setState({
+          uid: res.uid,
+        });
+
+        //validasi form
+        if (jumlah && pilihan && keterangan) {
+          //dispatch ke action masukKeranjang
+          this.props.dispatch(masukKeranjang(this.state));
+        } else {
+          Alert.alert('Error', 'Jumlah, pilihan & Keterangan harus diisi');
+        }
+      } else {
+        Alert.alert('Info', 'Silahkan Login Terlebih Dahulu');
+        this.props.navigation.replace('Login');
+      }
+    });
+  };
+
   render() {
-    const {navigation} = this.props;
-    const {product, images} = this.state;
-    console.log('Param', this.props.route.params);
+    const {navigation, getDetailProductResult, saveKeranjangLoading} =
+      this.props;
+    const {product, images, jumlah, keterangan, pilihan} = this.state;
+    console.log('Param', this.props.route.params.Product);
     return (
       <View style={styles.container}>
         <View style={styles.button}>
@@ -48,7 +96,11 @@ export default class ProductDetail extends Component {
         <ProductSlider images={images} />
         <View style={styles.cont}>
           <View style={styles.ftr}>
-            <CardFitur fitur={product.jenis} />
+            <CardFitur
+              id={product.idProduct}
+              fitur={getDetailProductResult}
+              navigation={navigation}
+            />
           </View>
           <View style={styles.desc}>
             <Text style={styles.nama}>{product.nama}</Text>
@@ -58,7 +110,7 @@ export default class ProductDetail extends Component {
             </Text>
             <View style={styles.garis} />
             <View style={styles.wrap}>
-              <Text style={styles.jenis}>Jenis : {product.jenisHotel}</Text>
+              <Text style={styles.jenis}>Jenis : {product.jenis}</Text>
               <Text style={styles.jenis}>Rate : {product.nilai}</Text>
             </View>
             <View>
@@ -66,19 +118,30 @@ export default class ProductDetail extends Component {
               <Text style={styles.jenis}>{product.tentang}</Text>
             </View>
             <View style={styles.inpt}>
-              <Inputan label="Jumlah" textareas fontSize={13} />
+              <Inputan
+                value={jumlah}
+                label="Jumlah"
+                textareas
+                fontSize={13}
+                onChangeText={jumlah => this.setState({jumlah})}
+                keyboardType="number-pad"
+              />
               <Pilihan
                 label="Kamar"
                 width={responsiveWidth(166)}
                 height={responsiveHeight(35)}
                 fontSize={13}
-                datas={product.kamar}
+                datas={product.pilihan}
+                onValueChange={pilihan => this.setState({pilihan})}
+                selectedValue={pilihan}
               />
             </View>
             <Inputan
               label="Keterangan"
               textarea
               placeholder="Anda Dapat Memberikan Keterangan di Sini"
+              value={keterangan}
+              onChangeText={keterangan => this.setState({keterangan})}
             />
             <Jarak height={15} />
             <Tombol
@@ -87,6 +150,8 @@ export default class ProductDetail extends Component {
               icon="KeranjangMasuk"
               padding={responsiveHeight(50)}
               fontSize={18}
+              onPress={() => this.masukKeranjang()}
+              loading={saveKeranjangLoading}
             />
           </View>
         </View>
@@ -94,6 +159,16 @@ export default class ProductDetail extends Component {
     );
   }
 }
+
+const mapStateToProps = state => ({
+  getDetailProductResult: state.FiturReducer.getDetailProductResult,
+
+  saveKeranjangLoading: state.KeranjangReducer.saveKeranjangLoading,
+  saveKeranjangResult: state.KeranjangReducer.saveKeranjangResult,
+  saveKeranjangError: state.KeranjangReducer.saveKeranjangError,
+});
+
+export default connect(mapStateToProps, null)(ProductDetail);
 
 const styles = StyleSheet.create({
   container: {

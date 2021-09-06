@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
     // borderRadius: 10,
     borderBottomRightRadius: 25,
     borderTopLeftRadius: 25,
-    width: responsiveWidth(350),
+    width: responsiveWidth(399),
   },
   dotStyle: {
     width: 10,

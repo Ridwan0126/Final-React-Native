@@ -36,7 +36,7 @@ export default TextIcon;
 
 const styles = StyleSheet.create({
   container: (padding, disabled) => ({
-    backgroundColor: colors.primary,
+    backgroundColor: disabled ? colors.border : colors.primary,
     padding: 5,
     borderRadius: 5,
     flexDirection: 'row',

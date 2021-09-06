@@ -11,21 +11,19 @@ import {dummyProduct} from '../../data';
 import {Jarak, Tombol} from '../../components';
 import {connect} from 'react-redux';
 import {getListFitur} from '../../actions/FiturAction';
-// import { limitJersey } from '../../actions/JerseyAction'
+import {limitProduct} from '../../actions/ProductAction';
 
 class Home extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      products: dummyProduct,
-    };
+    this.state = {};
   }
 
   componentDidMount() {
     this._unsubscribe = this.props.navigation.addListener('focus', () => {
       this.props.dispatch(getListFitur());
-      // this.props.dispatch(limitJersey());
+      this.props.dispatch(limitProduct());
     });
   }
 
@@ -34,12 +32,11 @@ class Home extends Component {
   }
 
   render() {
-    const {products} = this.state;
     const {navigation} = this.props;
     // console.log('Nav', this.props.navigation);
     return (
       <View style={styles.page}>
-        <HeaderComponent navigation={navigation} />
+        <HeaderComponent navigation={navigation} page="Home" />
         <ScrollView
           showsVerticalScrollIndicator={false}
           style={styles.container}>
@@ -47,11 +44,11 @@ class Home extends Component {
           <BannerSlider />
           <View style={styles.Fitur}>
             <Text style={styles.label}>Fitur</Text>
-            <ListFitur />
+            <ListFitur navigation={navigation} />
           </View>
           <View style={styles.Product}>
             <Text style={styles.label}>Product</Text>
-            <ListProducts products={products} navigation={navigation} />
+            <ListProducts navigation={navigation} />
             <Tombol tittle="Lihat Semua" type="text" padding={7} />
           </View>
           <Jarak height={85} />
@@ -66,7 +63,7 @@ export default connect()(Home);
 const styles = StyleSheet.create({
   page: {flex: 1, backgroundColor: colors.white},
   Fitur: {
-    marginHorizontal: 30,
+    marginHorizontal: 10,
     marginTop: 10,
   },
   label: {
@@ -74,7 +71,7 @@ const styles = StyleSheet.create({
     fontFamily: fonts.primary.bold,
   },
   Product: {
-    marginHorizontal: 30,
+    marginHorizontal: 15,
     marginTop: 10,
   },
   container: {

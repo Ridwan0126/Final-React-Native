@@ -2,42 +2,112 @@ import React, {Component} from 'react';
 import {Text, StyleSheet, View} from 'react-native';
 import {dummyPesanans} from '../../data/dummyPesanan';
 import {ListKeranjang, Tombol} from '../../components';
-import {colors, fonts, numberWithCommas, responsiveHeight} from '../../utils';
+import {
+  colors,
+  fonts,
+  getData,
+  numberWithCommas,
+  responsiveHeight,
+} from '../../utils';
+import {connect} from 'react-redux';
+import {getListKeranjang} from '../../actions/KeranjangAction';
 
-export default class Keranjang extends Component {
-  constructor(props) {
-    super(props);
+class Keranjang extends Component {
+  componentDidMount() {
+    getData('user').then(res => {
+      if (res) {
+        //udah login
+        this.props.dispatch(getListKeranjang(res.uid));
+      } else {
+        // belum login
+        this.props.navigation.replace('Login');
+      }
+    });
+  }
 
-    this.state = {
-      pesanan: dummyPesanans[0],
-    };
+  componentDidUpdate(prevProps) {
+    const {deleteKeranjangResult} = this.props;
+
+    if (
+      deleteKeranjangResult &&
+      prevProps.deleteKeranjangResult !== deleteKeranjangResult
+    ) {
+      getData('user').then(res => {
+        if (res) {
+          //udah login
+          this.props.dispatch(getListKeranjang(res.uid));
+        } else {
+          // belum login
+          this.props.navigation.replace('Login');
+        }
+      });
+    }
   }
 
   render() {
-    const {pesanan} = this.state;
+    const {getListKeranjangResult} = this.props;
     return (
       <View style={styles.page}>
-        <ListKeranjang keranjangs={pesanan.pesanans} />
+        <ListKeranjang {...this.props} />
         <View style={styles.footer}>
           <View style={styles.totalHarga}>
             <Text style={styles.textBold}>Total Harga :</Text>
             <Text style={styles.textBold}>
-              Rp. {numberWithCommas(pesanan.totalHarga)}
+              Rp.{' '}
+              {getListKeranjangResult
+                ? numberWithCommas(getListKeranjangResult.totalHarga)
+                : 0}
             </Text>
           </View>
-          <Tombol
+          {getListKeranjangResult ? (
+            <Tombol
+              tittle="Check Out"
+              type="textIcon"
+              fontSize={18}
+              padding={responsiveHeight(15)}
+              icon="keranjang"
+              onPress={() =>
+                this.props.navigation.navigate('Checkout', {
+                  totalHarga: getListKeranjangResult.totalHarga,
+                  totalBerat: getListKeranjangResult.totalBerat,
+                })
+              }
+            />
+          ) : (
+            <Tombol
+              tittle="Check Out"
+              type="textIcon"
+              fontSize={18}
+              padding={responsiveHeight(15)}
+              icon="keranjang"
+              disabled={true}
+            />
+          )}
+          {/* <Tombol
             tittle="Check Out"
             type="textIcon"
             fontSize={18}
             padding={responsiveHeight(15)}
             icon="Keranjang"
             onPress={() => this.props.navigation.navigate('CheckOut')}
-          />
+          /> */}
         </View>
       </View>
     );
   }
 }
+
+const mapStateToProps = state => ({
+  getListKeranjangLoading: state.KeranjangReducer.getListKeranjangLoading,
+  getListKeranjangResult: state.KeranjangReducer.getListKeranjangResult,
+  getListKeranjangError: state.KeranjangReducer.getListKeranjangError,
+
+  deleteKeranjangLoading: state.KeranjangReducer.deleteKeranjangLoading,
+  deleteKeranjangResult: state.KeranjangReducer.deleteKeranjangResult,
+  deleteKeranjangError: state.KeranjangReducer.deleteKeranjangError,
+});
+
+export default connect(mapStateToProps, null)(Keranjang);
 
 const styles = StyleSheet.create({
   page: {

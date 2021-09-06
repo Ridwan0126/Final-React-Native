@@ -12,6 +12,7 @@ const Pilihan = ({
   height,
   fontSize,
 }) => {
+  console.log('Datas', datas);
   return (
     <View style={styles.container}>
       <Text style={styles.label(fontSize)}>{label} :</Text>
@@ -37,6 +38,10 @@ const Pilihan = ({
                   label={item.type + ' ' + item.city_name}
                   value={item.city_id}
                 />
+              );
+            } else if (label == 'Pilih Ekspedisi') {
+              return (
+                <Picker.Item label={item.label} value={item} key={item.id} />
               );
             } else {
               return <Picker.Item key={idx} label={item} value={item} />;

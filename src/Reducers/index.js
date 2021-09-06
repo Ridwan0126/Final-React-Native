@@ -4,6 +4,8 @@ import RajaOngkirReducer from './rajaongkir';
 import AuthReducer from './auth';
 import ProfileReducer from './profile';
 import FiturReducer from './fitur';
+import ProductReducer from './Products';
+import KeranjangReducer from './keranjang';
 
 const rootReducer = combineReducers({
   UserReducer,
@@ -11,6 +13,8 @@ const rootReducer = combineReducers({
   AuthReducer,
   ProfileReducer,
   FiturReducer,
+  ProductReducer,
+  KeranjangReducer,
 });
 
 export default rootReducer;

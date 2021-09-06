@@ -1,13 +1,13 @@
-import {GET_LIST_FITUR} from '../../actions/FiturAction';
+import {GET_LIST_FITUR, GET_DETAIL_FITUR} from '../../actions/FiturAction';
 
 const initialState = {
   getListFiturLoading: false,
   getListFiturResult: false,
   getListFiturError: false,
 
-  //   getDetailLigaLoading: false,
-  //   getDetailLigaResult: false,
-  //   getDetailLigaError: false,
+  getDetailProductLoading: false,
+  getDetailProductResult: false,
+  getDetailProductError: false,
 };
 
 export default function (state = initialState, action) {
@@ -20,13 +20,13 @@ export default function (state = initialState, action) {
         getListFiturError: action.payload.errorMessage,
       };
 
-    // case GET_DETAIL_LIGA:
-    //   return {
-    //     ...state,
-    //     getDetailLigaLoading: action.payload.loading,
-    //     getDetailLigaResult: action.payload.data,
-    //     getDetailLigaError: action.payload.errorMessage,
-    //   };
+    case GET_DETAIL_FITUR:
+      return {
+        ...state,
+        getDetailProductLoading: action.payload.loading,
+        getDetailProductResult: action.payload.data,
+        getDetailProductError: action.payload.errorMessage,
+      };
     default:
       return state;
   }

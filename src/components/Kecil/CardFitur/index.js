@@ -1,16 +1,28 @@
 import React from 'react';
 import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {connect} from 'react-redux';
+import {getListFitur} from '../../../actions/FiturAction';
+import {getProductByFitur} from '../../../actions/ProductAction';
 import {colors, responsiveHeight, responsiveWidth} from '../../../utils';
 
-const CardFitur = ({fitur}) => {
+const CardFitur = ({fitur, navigation, id, dispatch}) => {
+  const toProductByFitur = (id, namaFitur) => {
+    // ke Jersey Action
+    dispatch(getProductByFitur(id, namaFitur));
+
+    // navigate ke ListJersey
+    navigation.navigate('ListProduct');
+  };
   return (
-    <TouchableOpacity style={styles.container}>
-      <Image source={fitur.gambar} style={styles.Fiturs} />
+    <TouchableOpacity
+      style={styles.container}
+      onPress={() => toProductByFitur(id, fitur.namaFitur)}>
+      <Image source={{uri: fitur.image}} style={styles.Fiturs} />
     </TouchableOpacity>
   );
 };
 
-export default CardFitur;
+export default connect()(CardFitur);
 
 const styles = StyleSheet.create({
   container: {

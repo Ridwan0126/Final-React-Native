@@ -1,48 +1,59 @@
 import React from 'react';
 import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import {colors, fonts, responsiveWidth} from '../../../utils';
+import {colors, fonts, numberWithCommas, responsiveWidth} from '../../../utils';
 import Tombol from '../Tombol';
 
-const CardProduct = ({products, navigation}) => {
+const CardProduct = ({Product, navigation}) => {
   return (
-    <View key={products.id} style={styles.container}>
+    <View key={Product.id} style={styles.container}>
       <TouchableOpacity style={styles.card}>
-        <Image source={products.gambar[0]} style={styles.image} />
-        <Text style={styles.tittle}>{products.nama}</Text>
+        <Image source={{uri: Product.gambar[0]}} style={styles.image} />
+        <View>
+          <Text style={styles.tittle}>{Product.nama}</Text>
+          <Text style={styles.bold}>Rp. {numberWithCommas(Product.harga)}</Text>
+          <Text style={styles.bold}>{Product.nilai}</Text>
+        </View>
       </TouchableOpacity>
       <Tombol
         type="text"
         tittle="Details"
         padding={7}
-        onPress={() => navigation.navigate('ProductDetail', {products})}
+        onPress={() => navigation.navigate('ProductDetail', {Product})}
       />
     </View>
   );
 };
 
-
 export default CardProduct;
 
 const styles = StyleSheet.create({
   container: {
-    marginBottom: 25,
+    marginBottom: 20,
   },
   image: {
-    width: 124,
-    height: 124,
+    width: 135,
+    height: 135,
+    alignItems: 'center',
   },
   tittle: {
     fontFamily: fonts.primary.bold,
-    fontSize: 13,
+    fontSize: 16,
     textTransform: 'capitalize',
+    // marginRight: 10,
     textAlign: 'center',
+    marginBottom: 8,
   },
   card: {
     backgroundColor: colors.yellow,
-    width: responsiveWidth(150),
+    width: responsiveWidth(180),
     alignItems: 'center',
     padding: 10,
     borderRadius: 10,
+    // justifyContent: 'space-between',
     // marginBottom: 10,
+  },
+  bold: {
+    marginLeft: -20,
+    fontFamily: fonts.primary.regular,
   },
 });
