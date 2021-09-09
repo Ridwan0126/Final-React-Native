@@ -22,7 +22,7 @@ const Pilihan = ({
           style={styles.picker(width, height, fontSize)}
           onValueChange={onValueChange}>
           <Picker.Item label="--Pilih--" value="" />
-          {datas.map((item, idx) => {
+          {/* {datas.map((item, idx) => {
             if (label == 'Provinsi') {
               return (
                 <Picker.Item
@@ -46,7 +46,7 @@ const Pilihan = ({
             } else {
               return <Picker.Item key={idx} label={item} value={item} />;
             }
-          })}
+          })} */}
         </Picker>
       </View>
     </View>

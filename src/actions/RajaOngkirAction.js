@@ -13,6 +13,34 @@ export const GET_PROVINSI = 'GET_PROVINSI';
 export const GET_KOTA = 'GET_KOTA';
 export const GET_KOTA_DETAIL = 'GET_KOTA_DETAIL';
 export const POST_ONGKIR = 'POST_ONGKIR';
+export const GET_CONTOH = 'GET_CONTOH';
+
+export const GetContoh = () => {
+  console.log('Contoh ===>');
+  return dispatch => {
+    dispatchLoading(dispatch, GET_CONTOH);
+
+    axios('http://192.168.43.33:8080/data/api/Product')
+      .then(response => {
+        console.log('Respon API JAVA 01', response);
+        if (response.status !== 200) {
+          dispatchError(dispatch, GET_CONTOH, response);
+        } else {
+          console.log('Respon CONTOH DARI API 02', response.data);
+          dispatchSuccess(
+            dispatch,
+            GET_CONTOH,
+            response.data ? response.data : [],
+          );
+        }
+      })
+      .catch(error => {
+        // dispatchError(dispatch, GET_CONTOH, error.message);
+        // Alert.alert(error.message);
+        console.log('asasasasasasasasasasas', error.message);
+      });
+  };
+};
 
 export const getProvinsiList = () => {
   console.log('Provinsi');

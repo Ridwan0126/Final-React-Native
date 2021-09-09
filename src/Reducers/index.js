@@ -6,6 +6,7 @@ import ProfileReducer from './profile';
 import FiturReducer from './fitur';
 import ProductReducer from './Products';
 import KeranjangReducer from './keranjang';
+import ContohReducer from './Contoh';
 
 const rootReducer = combineReducers({
   UserReducer,
@@ -15,6 +16,7 @@ const rootReducer = combineReducers({
   FiturReducer,
   ProductReducer,
   KeranjangReducer,
+  ContohReducer,
 });
 
 export default rootReducer;

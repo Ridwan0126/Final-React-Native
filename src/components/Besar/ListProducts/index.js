@@ -5,11 +5,15 @@ import {connect} from 'react-redux';
 import {colors} from '../../../utils';
 
 const ListProducts = ({
-  getListProductLoading,
-  getListProductResult,
-  getListProductError,
+  // getListProductLoading,
+  // getListProductResult,
+  // getListProductError,
+  getListContohLoading,
+  getListContohResult,
+  getListContohError,
   navigation,
 }) => {
+  console.log('DILISTSSSSSSSSSSSSSSSSSSSSS', getListContohResult);
   return (
     <View style={styles.container}>
       {/* {products.map(product => {
@@ -21,22 +25,23 @@ const ListProducts = ({
           />
         );
       })} */}
-      {getListProductResult ? (
-        Object.keys(getListProductResult).map(key => {
+      {getListContohResult ? (
+        Object.keys(getListContohResult).map(id => {
+          console.log('asdasdasd', getListContohResult[id]);
           return (
             <CardProduct
-              key={key}
-              Product={getListProductResult[key]}
+              key={id}
+              Product={getListContohResult[id]}
               navigation={navigation}
             />
           );
         })
-      ) : getListProductLoading ? (
+      ) : getListContohLoading ? (
         <View style={styles.loading}>
           <ActivityIndicator color={colors.primary} />
         </View>
-      ) : getListProductError ? (
-        <Text>{getListProductError}</Text>
+      ) : getListContohError ? (
+        <Text>{getListContohError}</Text>
       ) : (
         <Text>Data Kosong</Text>
       )}
@@ -45,9 +50,13 @@ const ListProducts = ({
 };
 
 const mapStateToProps = state => ({
-  getListProductLoading: state.ProductReducer.getListProductLoading,
-  getListProductResult: state.ProductReducer.getListProductResult,
-  getListProductError: state.ProductReducer.getListProductError,
+  // getListProductLoading: state.ProductReducer.getListProductLoading,
+  // getListProductResult: state.ProductReducer.getListProductResult,
+  // getListProductError: state.ProductReducer.getListProductError,
+
+  getListContohLoading: state.ContohReducer.getListContohLoading,
+  getListContohResult: state.ContohReducer.getListContohResult,
+  getListContohError: state.ContohReducer.getListContohError,
 });
 
 export default connect(mapStateToProps, null)(ListProducts);

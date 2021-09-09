@@ -35,7 +35,7 @@ export default class ProductSlider extends Component {
     console.log('Prew img', previewImage);
     return (
       <View>
-        <SliderBox
+        {/* <SliderBox
           images={images}
           circleLoop
           sliderBoxHeight={responsiveHeight(350)}
@@ -57,7 +57,7 @@ export default class ProductSlider extends Component {
             enableSwipeDown
             onSwipeDown={() => this.setState({openImage: false})}
           />
-        </Modal>
+        </Modal> */}
       </View>
     );
   }

@@ -4,14 +4,20 @@ import {colors, fonts, numberWithCommas, responsiveWidth} from '../../../utils';
 import Tombol from '../Tombol';
 
 const CardProduct = ({Product, navigation}) => {
+  console.log('PRODUCT CARD', Product);
   return (
     <View key={Product.id} style={styles.container}>
+      {/* <Text style={styles.tittle}>{Product.nameProduct}</Text> */}
       <TouchableOpacity style={styles.card}>
-        <Image source={{uri: Product.gambar[0]}} style={styles.image} />
+        <Image source={{uri: Product.thumbnailURL}} style={styles.image} />
         <View>
-          <Text style={styles.tittle}>{Product.nama}</Text>
-          <Text style={styles.bold}>Rp. {numberWithCommas(Product.harga)}</Text>
-          <Text style={styles.bold}>{Product.nilai}</Text>
+          <Text style={styles.tittle}>{Product.namProduct}</Text>
+          <Text style={styles.bold}>
+            Rp. {numberWithCommas(Product.hargabeli)}
+          </Text>
+          <Text style={styles.bold}>
+            Rp. {numberWithCommas(Product.hargajual)}
+          </Text>
         </View>
       </TouchableOpacity>
       <Tombol

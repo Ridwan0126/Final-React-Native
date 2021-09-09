@@ -1,3 +1,4 @@
+import axios from 'axios';
 import {Alert} from 'react-native';
 // import {FIREBASE} from '../../firebase';
 import FIREBASE from '../config/FIREBASE';
@@ -39,38 +40,59 @@ export const loginUser = (email, password) => {
   console.log('Action Login', email + ' ' + password);
   return dispatch => {
     dispatchLoading(dispatch, LOGIN_USER);
-
-    FIREBASE.auth()
-      .signInWithEmailAndPassword(email, password)
-      .then(Sukses => {
-        // Signed in
-        FIREBASE.database()
-          .ref('/users/' + Sukses.user.uid)
-          .once('value')
-          .then(resDB => {
-            // ...
-            if (resDB.val()) {
-              dispatchSuccess(dispatch, LOGIN_USER, resDB.val());
-
-              storeData('user', resDB.val());
-            } else {
-              dispatch({
-                type: LOGIN_USER,
-                payload: {
-                  loading: false,
-                  data: false,
-                  errorMessage: 'Sorry!. User Data Not Found!',
-                },
-              });
-              Alert.alert('Sorry!. User Data Not Found!');
-            }
-          });
-        // ...
+    axios('http://192.168.43.33:80808080/api/users')
+      .then(response => {
+        console.log('Respon API JAVA 01aaaaaaaaaaa', response);
+        if (response.status !== 200) {
+          dispatchError(dispatch, LOGIN_USER, response);
+        } else {
+          console.log(
+            'Respon CONTOH DARI API 02aaaaaaaaaaaaaaaaaaaa',
+            response.data,
+          );
+          dispatchSuccess(
+            dispatch,
+            LOGIN_USER,
+            response.data ? response.data : [],
+          );
+        }
       })
       .catch(error => {
-        // ..
-        dispatchError(dispatch, LOGIN_USER, error.message);
-        Alert.alert('error', 'Guys! Yang bener dong');
+        dispatchError(dispatch, LOGIN_USER, error);
+        Alert.alert(error);
       });
+
+    // FIREBASE.auth()
+    //   .signInWithEmailAndPassword(email, password)
+    //   .then(Sukses => {
+    //     // Signed in
+    //     FIREBASE.database()
+    //       .ref('/users/' + Sukses.user.uid)
+    //       .once('value')
+    //       .then(resDB => {
+    //         // ...
+    //         if (resDB.val()) {
+    //           dispatchSuccess(dispatch, LOGIN_USER, resDB.val());
+
+    //           storeData('user', resDB.val());
+    //         } else {
+    //           dispatch({
+    //             type: LOGIN_USER,
+    //             payload: {
+    //               loading: false,
+    //               data: false,
+    //               errorMessage: 'Sorry!. User Data Not Found!',
+    //             },
+    //           });
+    //           Alert.alert('Sorry!. User Data Not Found!');
+    //         }
+    //       });
+    //     // ...
+    //   })
+    //   .catch(error => {
+    //     // ..
+    //     dispatchError(dispatch, LOGIN_USER, error.message);
+    //     Alert.alert('error', 'Guys! Yang bener dong');
+    //   });
   };
 };

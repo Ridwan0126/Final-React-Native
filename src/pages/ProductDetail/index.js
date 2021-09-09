@@ -29,9 +29,9 @@ class ProductDetail extends Component {
 
     this.state = {
       product: this.props.route.params.Product,
-      images: this.props.route.params.Product.gambar,
+      images: this.props.route.params.Product.thumbnailURL,
       jumlah: '',
-      pilihan: '',
+      pilihan: ['Family', 'Single', 'Romance', 'Vloger', 'Bisnis'],
       keterangan: '',
       uid: '',
     };
@@ -83,6 +83,9 @@ class ProductDetail extends Component {
     console.log('Param', this.props.route.params.Product);
     return (
       <View style={styles.container}>
+        <View style={styles.head}>
+          <Text style={styles.Judul}>{product.namaProduct}</Text>
+        </View>
         <View style={styles.button}>
           <Tombol
             icon="Kembali"
@@ -90,10 +93,10 @@ class ProductDetail extends Component {
             onPress={() => navigation.goBack()}
           />
           <View style={styles.head}>
-            <Text style={styles.Judul}>{product.nama}</Text>
+            <Text style={styles.Judul}>{product.namaProduct}</Text>
           </View>
         </View>
-        <ProductSlider images={images} />
+        {/* <ProductSlider images={images} /> */}
         <View style={styles.cont}>
           <View style={styles.ftr}>
             <CardFitur
@@ -103,45 +106,43 @@ class ProductDetail extends Component {
             />
           </View>
           <View style={styles.desc}>
-            <Text style={styles.nama}>{product.nama}</Text>
-            <Text>Lokasi : {product.lokasi}</Text>
-            <Text style={styles.harga}>
-              Harga : Rp. {numberWithCommas(product.harga)}
-            </Text>
+            <Text style={styles.nama}>{product.namaProduct}</Text>
+            <Text>Lokasi : {product.namaProduct}</Text>
+            <Text style={styles.harga}>Harga : Rp. {product.namaProduct}</Text>
             <View style={styles.garis} />
             <View style={styles.wrap}>
-              <Text style={styles.jenis}>Jenis : {product.jenis}</Text>
-              <Text style={styles.jenis}>Rate : {product.nilai}</Text>
+              <Text style={styles.jenis}>Jenis : {product.namaProduct}</Text>
+              <Text style={styles.jenis}>Rate : {product.nameProduct}</Text>
             </View>
             <View>
               <Text style={styles.jenis}>Deskripsi :</Text>
-              <Text style={styles.jenis}>{product.tentang}</Text>
+              <Text style={styles.jenis}>{product.namaProduct}</Text>
             </View>
             <View style={styles.inpt}>
               <Inputan
-                value={jumlah}
+                // value={product.hargajual}
                 label="Jumlah"
                 textareas
                 fontSize={13}
-                onChangeText={jumlah => this.setState({jumlah})}
+                // onChangeText={hargaJual => this.setState({hargaJual})}
                 keyboardType="number-pad"
               />
               <Pilihan
                 label="Kamar"
-                width={responsiveWidth(166)}
-                height={responsiveHeight(35)}
+                // width={responsiveWidth(166)}
+                // height={responsiveHeight(35)}
                 fontSize={13}
-                datas={product.pilihan}
-                onValueChange={pilihan => this.setState({pilihan})}
-                selectedValue={pilihan}
+                // datas={pilihan}
+                // onValueChange={pilihan => this.setState({pilihan})}
+                // selectedValue={pilihan}
               />
             </View>
             <Inputan
               label="Keterangan"
               textarea
               placeholder="Anda Dapat Memberikan Keterangan di Sini"
-              value={keterangan}
-              onChangeText={keterangan => this.setState({keterangan})}
+              // value={product.hargajual}
+              // onChangeText={hargaJual => this.setState({hargaJual})}
             />
             <Jarak height={15} />
             <Tombol
@@ -178,7 +179,7 @@ const styles = StyleSheet.create({
   cont: {
     position: 'absolute',
     bottom: 0,
-    height: responsiveHeight(493),
+    // height: responsiveHeight(493),
     backgroundColor: colors.white,
     width: '100%',
     borderTopRightRadius: 40,
@@ -197,12 +198,12 @@ const styles = StyleSheet.create({
     marginHorizontal: 30,
   },
   nama: {
-    fontSize: RFValue(24, heightMobileUI),
+    // fontSize: RFValue(24, heightMobileUI),
     fontFamily: fonts.primary.bold,
     textTransform: 'capitalize',
   },
   harga: {
-    fontSize: RFValue(24, heightMobileUI),
+    // fontSize: RFValue(24, heightMobileUI),
     fontFamily: fonts.primary.light,
   },
   ftr: {
@@ -225,7 +226,7 @@ const styles = StyleSheet.create({
     // marginRight: 30,
   },
   Judul: {
-    fontSize: RFValue(30, heightMobileUI),
+    // fontSize: RFValue(30, heightMobileUI),
     fontFamily: fonts.primary.bold,
     textTransform: 'capitalize',
     color: colors.white,

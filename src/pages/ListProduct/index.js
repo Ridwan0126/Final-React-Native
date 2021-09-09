@@ -1,5 +1,11 @@
 import React, {Component} from 'react';
-import {Text, StyleSheet, View, ScrollView} from 'react-native';
+import {
+  Text,
+  StyleSheet,
+  View,
+  ScrollView,
+  ActivityIndicator,
+} from 'react-native';
 import {
   BannerSlider,
   HeaderComponent,
@@ -12,6 +18,7 @@ import {Jarak, Tombol} from '../../components';
 import {connect} from 'react-redux';
 import {getListFitur} from '../../actions/FiturAction';
 import {getListProduct} from '../../actions/ProductAction';
+import {GetContoh} from '../../actions/RajaOngkirAction';
 
 class ListProduct extends Component {
   constructor(props) {
@@ -26,6 +33,7 @@ class ListProduct extends Component {
       console.log('Id DI Didmount', idProduct);
       this.props.dispatch(getListFitur());
       this.props.dispatch(getListProduct(idProduct, keyword));
+      this.props.dispatch(GetContoh());
     });
   }
 
@@ -46,8 +54,15 @@ class ListProduct extends Component {
   }
 
   render() {
-    const {navigation, namaFitur, keyword} = this.props;
-    // console.log('ID PRODUCT', this.props.idProduct);
+    const {
+      navigation,
+      namaFitur,
+      keyword,
+      getListContohLoading,
+      getListContohResult,
+      getListContohError,
+    } = this.props;
+    console.log('API DI LIST PRODUCT', getListContohResult);
     return (
       <View style={styles.page}>
         <HeaderComponent navigation={navigation} page="ListProduct" />
@@ -57,8 +72,23 @@ class ListProduct extends Component {
           <View style={styles.Fitur}>
             <ListFitur navigation={navigation} />
           </View>
+          <View>
+            {/* {getListContohResult ? (
+              Object.keys(getListContohResult).map(id => {
+                return <Text key={id}>{getListContohResult[id].email}</Text>;
+              })
+            ) : getListContohLoading ? (
+              <View style={styles.loading}>
+                <ActivityIndicator color={colors.primary} />
+              </View>
+            ) : getListContohError ? (
+              <Text>{getListContohError}</Text>
+            ) : (
+              <Text>Data Kosong</Text>
+            )} */}
+          </View>
           <View style={styles.Product}>
-            {keyword ? (
+            {/* {keyword ? (
               <Text style={styles.label}>
                 Cari : <Text style={styles.boldLabel}>{keyword}</Text>
               </Text>
@@ -67,7 +97,7 @@ class ListProduct extends Component {
                 <Text style={styles.boldLabel}>Product </Text>
                 {namaFitur ? namaFitur : 'Yang Anda Mau'}
               </Text>
-            )}
+            )} */}
             <ListProducts navigation={navigation} />
           </View>
           <Jarak height={85} />
@@ -81,6 +111,10 @@ const mapStateToProps = state => ({
   idProduct: state.ProductReducer.idProduct,
   namaFitur: state.ProductReducer.namaFitur,
   keyword: state.ProductReducer.keyword,
+
+  getListContohLoading: state.ContohReducer.getListContohLoading,
+  getListContohResult: state.ContohReducer.getListContohResult,
+  getListContohError: state.ContohReducer.getListContohError,
 });
 
 export default connect(mapStateToProps, null)(ListProduct);
