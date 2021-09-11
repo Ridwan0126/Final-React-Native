@@ -28,7 +28,7 @@ export const dummyProduct = [
     kamar: ['Family', 'Single', 'Romance', 'Vloger', 'Bisnis'],
     ready: true,
     jumlah: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'],
-    lokasi: 'Denpasar, Nusa Dua',
+    lokasi: 'Daerah Khusus Ibukota Jakarta',
     tentang:
       'Hotel Kami Memiliki Fasilitas Yang Tidak Kalah Bagus Dari Hotel Lainnya, Antara lain: Kolam Renang, Pemandian Air Panas,, Meeting Rooms, Family rooms, Park, Dll. Jika Anda Tertarik Dengan Hotel Kami Silahkan Anda Berkunjung, Kami Menanti Kedatangan Anda',
   },
@@ -47,7 +47,7 @@ export const dummyProduct = [
     kamar: ['Family', 'Single', 'Romance', 'Vloger', 'Bisnis'],
     ready: true,
     jumlah: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'],
-    lokasi: 'Lembang',
+    lokasi: 'Provinsi Banten',
     tentang:
       'Hotel Kami Memiliki Fasilitas Yang Tidak Kalah Bagus Dari Hotel Lainnya, Antara lain: Kolam Renang, Pemandian Air Panas,, Meeting Rooms, Family rooms, Park, Dll. Jika Anda Tertarik Dengan Hotel Kami Silahkan Anda Berkunjung, Kami Menanti Kedatangan Anda',
   },
@@ -66,7 +66,7 @@ export const dummyProduct = [
     kamar: ['Family', 'Single', 'Romance', 'Vloger', 'Bisnis'],
     ready: true,
     jumlah: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'],
-    lokasi: 'Jakarta Selatan',
+    lokasi: 'Provinsi Jawa Barat',
     tentang:
       'Hotel Kami Memiliki Fasilitas Yang Tidak Kalah Bagus Dari Hotel Lainnya, Antara lain: Kolam Renang, Pemandian Air Panas,, Meeting Rooms, Family rooms, Park, Dll. Jika Anda Tertarik Dengan Hotel Kami Silahkan Anda Berkunjung, Kami Menanti Kedatangan Anda',
   },
@@ -82,10 +82,10 @@ export const dummyProduct = [
     harga: 1250000,
     nilai: 4.25,
     jenisHotel: 'Vloger',
-    kamar: ['Family', 'Single', 'Romance', 'Vloger', 'Bisnis'],
+    kamar: ['Family', 'Single', 'Romance', 'Vloger', 'Bisnis', 'aaasasas'],
     ready: true,
     jumlah: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'],
-    lokasi: 'Jogjakarta',
+    lokasi: 'Provinsi Jawa Timur',
     tentang:
       'Hotel Kami Memiliki Fasilitas Yang Tidak Kalah Bagus Dari Hotel Lainnya, Antara lain: Kolam Renang, Pemandian Air Panas,, Meeting Rooms, Family rooms, Park, Dll. Jika Anda Tertarik Dengan Hotel Kami Silahkan Anda Berkunjung, Kami Menanti Kedatangan Anda',
   },
@@ -104,8 +104,18 @@ export const dummyProduct = [
     kamar: ['Family', 'Single', 'Romance', 'Vloger', 'Bisnis'],
     ready: true,
     jumlah: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'],
-    lokasi: 'Jakarta Pusat',
+    lokasi: 'Provinsi Sumatera Utara',
     tentang:
       'Hotel Kami Memiliki Fasilitas Yang Tidak Kalah Bagus Dari Hotel Lainnya, Antara lain: Kolam Renang, Pemandian Air Panas,, Meeting Rooms, Family rooms, Park, Dll. Jika Anda Tertarik Dengan Hotel Kami Silahkan Anda Berkunjung, Kami Menanti Kedatangan Anda',
+  },
+  {
+    id: 6,
+    lokasi: 'Provinsi Riau',
+    kamar: ['Family', 'Single', 'Romance', 'Vloger', 'Bisnis'],
+  },
+  {
+    id: 7,
+    lokasi: 'Provinsi Kepulauan Riau',
+    kamar: ['Family', 'Single', 'Romance', 'Vloger', 'Bisnis'],
   },
 ];

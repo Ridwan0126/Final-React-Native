@@ -5,6 +5,9 @@ import {
   View,
   ScrollView,
   ActivityIndicator,
+  TextInput,
+  TouchableOpacity,
+  Image,
 } from 'react-native';
 import {
   BannerSlider,
@@ -19,20 +22,24 @@ import {connect} from 'react-redux';
 import {getListFitur} from '../../actions/FiturAction';
 import {getListProduct} from '../../actions/ProductAction';
 import {GetContoh} from '../../actions/RajaOngkirAction';
+import {Info} from '../../assets';
 
 class ListProduct extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {};
+    this.state = {
+      dummyFitur: dummyFitur,
+      dummyProduct: dummyProduct,
+    };
   }
 
   componentDidMount() {
     this._unsubscribe = this.props.navigation.addListener('focus', () => {
       const {idProduct, keyword} = this.props;
       console.log('Id DI Didmount', idProduct);
-      this.props.dispatch(getListFitur());
-      this.props.dispatch(getListProduct(idProduct, keyword));
+      // this.props.dispatch(getListFitur());
+      // this.props.dispatch(getListProduct(idProduct, keyword));
       this.props.dispatch(GetContoh());
     });
   }
@@ -56,26 +63,52 @@ class ListProduct extends Component {
   render() {
     const {
       navigation,
-      namaFitur,
+      // Fitur,
       keyword,
       getListContohLoading,
       getListContohResult,
       getListContohError,
     } = this.props;
-    console.log('API DI LIST PRODUCT', getListContohResult);
+    const {dummyFitur, dummyProduct} = this.state;
+    console.log('API DI LIST PRODUCT', dummyProduct);
     return (
       <View style={styles.page}>
-        <HeaderComponent navigation={navigation} page="ListProduct" />
+        {/* <HeaderComponent navigation={navigation} page="ListProduct" /> */}
         <ScrollView
           showsVerticalScrollIndicator={false}
           style={styles.container}>
-          <View style={styles.Fitur}>
-            <ListFitur navigation={navigation} />
-          </View>
+          {/* <ListProducts navigation={navigation} Product={dummyProduct} /> */}
+          <Jarak height={25} />
+          {/* <View style={styles.Fitur}>
+            <Text>{dummyProduct.jumlah}</Text> */}
+          {/* <ListFitur navigation={navigation} fitur={dummyFitur} /> */}
+          {/* </View> */}
           <View>
+            <TextInput
+              placeholder="Cari Wilayah Objek Pajak Anda"
+              style={{
+                borderWidth: 0.4,
+                marginTop: 18,
+                marginHorizontal: 20,
+                borderRadius: 10,
+                marginBottom: 5,
+              }}
+            />
+            <View style={styles.himbau}>
+              <Image source={Info} width={10} height={10} />
+              <Text style={{marginLeft: 9}}>
+                Pembayaran dapat diproses hingga 1 hari kerja, Demi kenyamanan
+                anda, Silahkan Bayar tagihan lebih awal.
+              </Text>
+            </View>
+            <View>
+              <View></View>
+            </View>
             {/* {getListContohResult ? (
               Object.keys(getListContohResult).map(id => {
-                return <Text key={id}>{getListContohResult[id].email}</Text>;
+                return (
+                  
+                );
               })
             ) : getListContohLoading ? (
               <View style={styles.loading}>
@@ -87,8 +120,8 @@ class ListProduct extends Component {
               <Text>Data Kosong</Text>
             )} */}
           </View>
-          <View style={styles.Product}>
-            {/* {keyword ? (
+          {/* <View style={styles.Product}> */}
+          {/* {keyword ? (
               <Text style={styles.label}>
                 Cari : <Text style={styles.boldLabel}>{keyword}</Text>
               </Text>
@@ -98,9 +131,9 @@ class ListProduct extends Component {
                 {namaFitur ? namaFitur : 'Yang Anda Mau'}
               </Text>
             )} */}
-            <ListProducts navigation={navigation} />
-          </View>
-          <Jarak height={85} />
+          <ListProducts navigation={navigation} Product={dummyProduct} />
+          {/* </View> */}
+          {/* <Jarak height={85} /> */}
         </ScrollView>
       </View>
     );
@@ -139,5 +172,17 @@ const styles = StyleSheet.create({
   boldLabel: {
     fontSize: 18,
     fontFamily: fonts.primary.bold,
+  },
+  himbau: {
+    margin: 8,
+    padding: 20,
+    textAlign: 'center',
+    borderWidth: 1,
+    borderRadius: 5,
+    backgroundColor: '#D7ECFF',
+    borderColor: '#0085FF',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });

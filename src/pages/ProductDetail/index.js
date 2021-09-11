@@ -22,6 +22,7 @@ import {RFValue} from 'react-native-responsive-fontsize';
 import {connect} from 'react-redux';
 import {getDetailFitur} from '../../actions/FiturAction';
 import {masukKeranjang} from '../../actions/KeranjangAction';
+import {dummyProduct} from '../../data';
 
 class ProductDetail extends Component {
   constructor(props) {
@@ -31,7 +32,7 @@ class ProductDetail extends Component {
       product: this.props.route.params.Product,
       images: this.props.route.params.Product.thumbnailURL,
       jumlah: '',
-      pilihan: ['Family', 'Single', 'Romance', 'Vloger', 'Bisnis'],
+      pilihan: dummyProduct,
       keterangan: '',
       uid: '',
     };

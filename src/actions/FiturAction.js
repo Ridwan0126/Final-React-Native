@@ -10,21 +10,21 @@ export const getListFitur = () => {
   return dispatch => {
     dispatchLoading(dispatch, GET_LIST_FITUR);
 
-    FIREBASE.database()
-      .ref('fitur')
-      .once('value', querySnapshot => {
-        console.log('SnapShot', querySnapshot.val());
-        let data = querySnapshot.val();
-        // let data = querySnapshot.val() ? querySnapshot.val() : [];
+    // FIREBASE.database()
+    //   .ref('fitur')
+    //   .once('value', querySnapshot => {
+    //     console.log('SnapShot', querySnapshot.val());
+    //     let data = querySnapshot.val();
+    //     // let data = querySnapshot.val() ? querySnapshot.val() : [];
 
-        // let dataItem = {...data};
+    //     // let dataItem = {...data};
 
-        dispatchSuccess(dispatch, GET_LIST_FITUR, data);
-      })
-      .catch(error => {
-        dispatchError(dispatch, GET_LIST_FITUR, error);
-        Alert.alert(error);
-      });
+    //     dispatchSuccess(dispatch, GET_LIST_FITUR, data);
+    //   })
+    //   .catch(error => {
+    //     dispatchError(dispatch, GET_LIST_FITUR, error);
+    //     Alert.alert(error);
+    //   });
   };
 };
 

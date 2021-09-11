@@ -38,9 +38,6 @@ const ListKeranjang = ({
         ) : (
           <Text>Data Kosong</Text>
         )}
-        {/* {keranjangs.map(keranjang => {
-          return <CardKeranjang keranjang={keranjang} key={keranjang.id} />;
-        })} */}
       </View>
     </ScrollView>
   );

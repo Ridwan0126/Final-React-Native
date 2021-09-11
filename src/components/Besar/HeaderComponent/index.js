@@ -29,10 +29,10 @@ class HeaderComponent extends Component {
     const {page, navigation, dispatch} = this.props;
     const {search} = this.state;
 
-    //   //jalankan action save keyword
+    //jalankan action save keyword
     dispatch(saveKeywordProduct(search));
 
-    //   //jika itu halaman home kita navigate ke listJersey
+    //jika itu halaman home kita navigate ke listJersey
     if (page !== 'ListProduct') {
       navigation.navigate('ListProduct');
     }
@@ -72,7 +72,6 @@ class HeaderComponent extends Component {
             totalKeranjang={2}
             padding={10}
             onPress={() => navigation.navigate('Keranjang')}
-            totalKeranjang={totalKeranjang}
           />
         </View>
       </View>
@@ -87,13 +86,15 @@ const mapStateToProps = state => ({
 export default connect(mapStateToProps, null)(HeaderComponent);
 
 const styles = StyleSheet.create({
-  conatiner: {backgroundColor: colors.primary, height: responsiveHeight(130)},
+  conatiner: {
+    backgroundColor: colors.primary,
+    height: responsiveHeight(126),
+  },
   input: {fontSize: 16, fontFamily: fonts.primary.regular},
   Cari: {
     flex: 1,
     flexDirection: 'row',
     backgroundColor: colors.white,
-    // borderRadius: 5,
     paddingLeft: 6,
     alignItems: 'center',
     borderBottomRightRadius: 50,

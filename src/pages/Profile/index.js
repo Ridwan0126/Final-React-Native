@@ -43,7 +43,7 @@ export default class Profile extends Component {
           profile: data,
         });
       } else {
-        this.props.navigation.replace('Login');
+        // this.props.navigation.replace('Login');
       }
     });
   };

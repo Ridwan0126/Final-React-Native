@@ -11,6 +11,9 @@ import History from './History';
 import Login from './Login';
 import Register1 from './Register/Register1';
 import Register2 from './Register/Register2';
+import PBB from './PBB';
+import Pembayaran from './Pembayaran';
+import BayarTagihan from './BayarTagihan';
 
 export {
   Register1,
@@ -26,4 +29,7 @@ export {
   Profile,
   ListProduct,
   ProductDetail,
+  PBB,
+  Pembayaran,
+  BayarTagihan,
 };

@@ -3,14 +3,16 @@ import {ScrollView, StyleSheet, Text, View} from 'react-native';
 import {CardHistory} from '../../Kecil';
 
 const ListHistory = ({pesanans}) => {
+  console.log('DATA PESANAN', pesanans);
   return (
-    <ScrollView showsVerticalScrollIndicator={false}>
-      <View style={styles.container}>
-        {pesanans.map(pesanan => {
-          return <CardHistory pesanan={pesanan} key={pesanan.id} />;
-        })}
-      </View>
-    </ScrollView>
+    // <ScrollView showsVerticalScrollIndicator={false}>
+    <View style={styles.container}>
+      {/* {pesanans.map(pesanan => { */}
+      {/* return  */}
+      <CardHistory pesanan={pesanans} key={pesanans.id} />
+      {/* })} */}
+    </View>
+    // </ScrollView>
   );
 };
 

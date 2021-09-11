@@ -20,7 +20,7 @@ export const GetContoh = () => {
   return dispatch => {
     dispatchLoading(dispatch, GET_CONTOH);
 
-    axios('http://192.168.43.33:8080/data/api/Product')
+    axios('http://192.168.43.33:8080/data/api/Customer')
       .then(response => {
         console.log('Respon API JAVA 01', response);
         if (response.status !== 200) {

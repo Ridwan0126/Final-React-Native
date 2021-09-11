@@ -15,6 +15,9 @@ import {
   Login,
   Register1,
   Register2,
+  PBB,
+  Pembayaran,
+  BayarTagihan,
 } from '../pages';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {BottomNav} from '../components';
@@ -25,11 +28,11 @@ const MainApp = () => {
   return (
     <Tab.Navigator tabBar={props => <BottomNav {...props} />}>
       <Tab.Screen name="Home" component={Home} options={{headerShown: false}} />
-      <Tab.Screen
+      {/* <Tab.Screen
         name="ListProduct"
         component={ListProduct}
         options={{title: 'Product', headerShown: false}}
-      />
+      /> */}
       <Tab.Screen
         name="Profile"
         component={Profile}
@@ -42,6 +45,11 @@ const MainApp = () => {
 const Router = () => {
   return (
     <Stack.Navigator initialRouteName="Splash">
+      <Stack.Screen
+        name="ListProduct"
+        component={ListProduct}
+        options={{title: 'PBB'}}
+      />
       <Stack.Screen
         name="Splash"
         component={Splash}
@@ -77,7 +85,7 @@ const Router = () => {
       <Stack.Screen
         name="Login"
         component={Login}
-        options={{headerShown: false}}
+        // options={{headerShown: false}}
       />
       <Stack.Screen
         name="Register1"
@@ -89,6 +97,9 @@ const Router = () => {
         component={Register2}
         options={{headerShown: false}}
       />
+      <Stack.Screen name="PBB" component={PBB} />
+      <Stack.Screen name="BayarTagihan" component={BayarTagihan} />
+      <Stack.Screen name="Pembayaran" component={Pembayaran} />
     </Stack.Navigator>
   );
 };

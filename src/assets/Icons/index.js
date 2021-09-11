@@ -17,6 +17,7 @@ import Kanan from './Kanan.svg';
 import Reg1 from './Reg01.svg';
 import Reg2 from './Reg02.svg';
 import Kembali2 from './Kembali2.svg';
+import Info from './info.png';
 
 export {
   Kembali2,
@@ -38,4 +39,5 @@ export {
   PanahKanan,
   Profile,
   Kembali,
+  Info,
 };

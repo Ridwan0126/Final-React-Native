@@ -3,29 +3,29 @@ import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {colors, fonts, numberWithCommas, responsiveWidth} from '../../../utils';
 import Tombol from '../Tombol';
 
-const CardProduct = ({Product, navigation}) => {
-  console.log('PRODUCT CARD', Product);
+const CardProduct = ({products, navigation}) => {
+  console.log('PRODUCT CARD', products);
   return (
-    <View key={Product.id} style={styles.container}>
-      {/* <Text style={styles.tittle}>{Product.nameProduct}</Text> */}
-      <TouchableOpacity style={styles.card}>
-        <Image source={{uri: Product.thumbnailURL}} style={styles.image} />
-        <View>
-          <Text style={styles.tittle}>{Product.namProduct}</Text>
-          <Text style={styles.bold}>
-            Rp. {numberWithCommas(Product.hargabeli)}
-          </Text>
-          <Text style={styles.bold}>
-            Rp. {numberWithCommas(Product.hargajual)}
-          </Text>
+    <View key={products.id} style={styles.container}>
+      <Text style={styles.tittle}>{products.nama}</Text>
+      {/* <TouchableOpacity style={styles.card}> */}
+      {/* <Image source={{uri: Product.thumbnailURL}} style={styles.image} /> */}
+      {/* <View>
+          <Text style={styles.tittle}>{products.kamar[0]}</Text>
+          <Text style={styles.tittle}>{products.kamar[1]}</Text>
+          <Text style={styles.tittle}>{products.kamar[2]}</Text>
+          <Text style={styles.tittle}>{products.kamar[3]}</Text>
+          <Text style={styles.tittle}>{products.kamar[4]}</Text>
+          <Text style={styles.tittle}>{products.kamar[5]}</Text>
+          <Text style={styles.tittle}>{products.kamar[5]}</Text>
         </View>
-      </TouchableOpacity>
-      <Tombol
+      </TouchableOpacity> */}
+      {/* <Tombol
         type="text"
         tittle="Details"
         padding={7}
-        onPress={() => navigation.navigate('ProductDetail', {Product})}
-      />
+        onPress={() => navigation.navigate('ProductDetail', {products})}
+      /> */}
     </View>
   );
 };
@@ -34,7 +34,7 @@ export default CardProduct;
 
 const styles = StyleSheet.create({
   container: {
-    marginBottom: 20,
+    // marginBottom: 20,
   },
   image: {
     width: 135,
@@ -46,13 +46,13 @@ const styles = StyleSheet.create({
     fontSize: 16,
     textTransform: 'capitalize',
     // marginRight: 10,
-    textAlign: 'center',
+    // textAlign: 'center',
     marginBottom: 8,
   },
   card: {
-    backgroundColor: colors.yellow,
-    width: responsiveWidth(180),
-    alignItems: 'center',
+    // backgroundColor: colors.yellow,
+    width: responsiveWidth(290),
+    // alignItems: 'center',
     padding: 10,
     borderRadius: 10,
     // justifyContent: 'space-between',

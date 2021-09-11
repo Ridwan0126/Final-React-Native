@@ -18,8 +18,10 @@ class Login extends Component {
 
   login = () => {
     const {email, password} = this.state;
+    console.log('loggggg', email, password);
     if (email && password) {
       this.props.dispatch(loginUser(email, password));
+      console.log('login', loginUser);
     } else {
       Alert.alert('Error', 'Guys!! Udah Bener Belom? Benerin Dulu Dong!');
     }
@@ -27,7 +29,7 @@ class Login extends Component {
 
   componentDidUpdate(prevProps) {
     const {loginResult} = this.props;
-
+    console.log('logggggiiinnnnnn', loginResult);
     if (loginResult && prevProps.loginResult !== loginResult) {
       this.props.navigation.replace('MainApp');
     }
@@ -35,6 +37,7 @@ class Login extends Component {
 
   render() {
     const {email, password} = this.state;
+    console.log('loggggg11112344', email, password);
     const {loginLoading} = this.props;
 
     return (

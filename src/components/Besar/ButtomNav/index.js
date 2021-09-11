@@ -72,10 +72,10 @@ const Styles = StyleSheet.create({
     right: 0,
     bottom: 0,
     flexDirection: 'row',
-    paddingVertical: 10,
-    paddingHorizontal: 34,
+    paddingVertical: 7,
+    paddingHorizontal: 94,
     marginBottom: 7,
-    marginHorizontal: 10,
+    marginHorizontal: 6,
     borderRadius: 5,
     shadowColor: '#000',
     shadowOffset: {

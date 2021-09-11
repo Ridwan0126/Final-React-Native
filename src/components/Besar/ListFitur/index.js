@@ -1,54 +1,21 @@
 import React from 'react';
-import {ActivityIndicator, StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, View} from 'react-native';
 import {connect} from 'react-redux';
 import {CardFitur} from '../../Kecil';
-import {colors} from '../../../utils';
 
-const ListFitur = ({
-  getListFiturLoading,
-  getListFiturResult,
-  getListFiturError,
-  navigation,
-}) => {
-  console.log('Data Fitur', getListFiturResult);
+const ListFitur = ({navigation, fitur}) => {
+  console.log('Data Fitur', fitur);
   return (
     <View style={styles.cont}>
       <View style={styles.container}>
-        {/* {fitur.map(fitur => {
+        {fitur.map(fitur => {
           return (
             <View key={fitur.id}>
-              <CardFitur fitur={fitur} key={fitur.id} />
+              <CardFitur navigation={navigation} fitur={fitur} key={fitur.id} />
               <Text style={styles.text}>{fitur.nama}</Text>
             </View>
           );
-        })} */}
-        {getListFiturResult ? (
-          Object.keys(getListFiturResult).map(key => {
-            // console.log('key',key);
-            return (
-              <View>
-                <CardFitur
-                  navigation={navigation}
-                  fitur={getListFiturResult[key]}
-                  id={key}
-                  key={key}
-                />
-                <Text style={styles.text}>
-                  {getListFiturResult[key].namaFitur}
-                </Text>
-              </View>
-            );
-          })
-        ) : getListFiturLoading ? (
-          <View style={styles.loading}>
-            <ActivityIndicator color={colors.primary} />
-          </View>
-        ) : // )
-        getListFiturError ? (
-          <Text>{getListFiturError}</Text>
-        ) : (
-          <Text>Data Kosong</Text>
-        )}
+        })}
       </View>
     </View>
   );
@@ -74,11 +41,12 @@ const styles = StyleSheet.create({
     shadowColor: '#000',
     shadowOffset: {
       width: 0,
-      height: 2,
+      height: 8,
     },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-    elevation: 5,
+    shadowOpacity: 0.44,
+    shadowRadius: 10.32,
+
+    elevation: 16,
     padding: 23,
     // borderRadius: 15,
   },

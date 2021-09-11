@@ -7,6 +7,7 @@ import ListMenu from './ListMenu/index.';
 import ProductSlider from './ProductSlider';
 import ListKeranjang from './ListKeranjang';
 import ListHistory from './ListHistory';
+import Himbauan from './himbauan';
 
 export {
   ListHistory,
@@ -18,4 +19,5 @@ export {
   BannerSlider,
   ListFitur,
   ProductSlider,
+  Himbauan,
 };

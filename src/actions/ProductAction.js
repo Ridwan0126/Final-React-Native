@@ -11,51 +11,51 @@ export const getListProduct = (idProduct, keyword) => {
   return dispatch => {
     dispatchLoading(dispatch, GET_LIST_PRODUCT);
 
-    if (idProduct) {
-      // console.log('ID PRODUCT', idProduct);
-      FIREBASE.database()
-        .ref('product')
-        .orderByChild('idProduct')
-        .equalTo(idProduct)
-        .once('value', querySnapshot => {
-          //Hasil
-          let data = querySnapshot.val();
+    // if (idProduct) {
+    //   // console.log('ID PRODUCT', idProduct);
+    //   FIREBASE.database()
+    //     .ref('product')
+    //     .orderByChild('idProduct')
+    //     .equalTo(idProduct)
+    //     .once('value', querySnapshot => {
+    //       //Hasil
+    //       let data = querySnapshot.val();
 
-          dispatchSuccess(dispatch, GET_LIST_PRODUCT, data);
-        })
-        .catch(error => {
-          dispatchError(dispatch, GET_LIST_PRODUCT, error);
-          alert(error);
-        });
-    } else if (keyword) {
-      FIREBASE.database()
-        .ref('product')
-        .orderByChild('kategory')
-        .equalTo(keyword) //.toUpperCase()
-        .once('value', querySnapshot => {
-          //Hasil
-          let data = querySnapshot.val();
+    //       dispatchSuccess(dispatch, GET_LIST_PRODUCT, data);
+    //     })
+    //     .catch(error => {
+    //       dispatchError(dispatch, GET_LIST_PRODUCT, error);
+    //       alert(error);
+    //     });
+    // } else if (keyword) {
+    //   FIREBASE.database()
+    //     .ref('product')
+    //     .orderByChild('kategory')
+    //     .equalTo(keyword) //.toUpperCase()
+    //     .once('value', querySnapshot => {
+    //       //Hasil
+    //       let data = querySnapshot.val();
 
-          dispatchSuccess(dispatch, GET_LIST_PRODUCT, data);
-        })
-        .catch(error => {
-          dispatchError(dispatch, GET_LIST_PRODUCT, error);
-          alert(error);
-        });
-    } else {
-      FIREBASE.database()
-        .ref('product')
-        .once('value', querySnapshot => {
-          //Hasil
-          let data = querySnapshot.val();
+    //       dispatchSuccess(dispatch, GET_LIST_PRODUCT, data);
+    //     })
+    //     .catch(error => {
+    //       dispatchError(dispatch, GET_LIST_PRODUCT, error);
+    //       alert(error);
+    //     });
+    // } else {
+    //   FIREBASE.database()
+    //     .ref('product')
+    //     .once('value', querySnapshot => {
+    //       //Hasil
+    //       let data = querySnapshot.val();
 
-          dispatchSuccess(dispatch, GET_LIST_PRODUCT, data);
-        })
-        .catch(error => {
-          dispatchError(dispatch, GET_LIST_PRODUCT, error);
-          Alert.alert(error);
-        });
-    }
+    //       dispatchSuccess(dispatch, GET_LIST_PRODUCT, data);
+    //     })
+    //     .catch(error => {
+    //       dispatchError(dispatch, GET_LIST_PRODUCT, error);
+    //       Alert.alert(error);
+    //     });
+    // }
   };
 };
 
@@ -63,19 +63,19 @@ export const limitProduct = () => {
   return dispatch => {
     dispatchLoading(dispatch, GET_LIST_PRODUCT);
 
-    FIREBASE.database()
-      .ref('product')
-      .limitToLast(6)
-      .once('value', querySnapshot => {
-        //Hasil
-        let data = querySnapshot.val();
+    // FIREBASE.database()
+    //   .ref('product')
+    //   .limitToLast(6)
+    //   .once('value', querySnapshot => {
+    //     //Hasil
+    //     let data = querySnapshot.val();
 
-        dispatchSuccess(dispatch, GET_LIST_PRODUCT, data);
-      })
-      .catch(error => {
-        dispatchError(dispatch, GET_LIST_PRODUCT, error);
-        Alert.alert(error);
-      });
+    //     dispatchSuccess(dispatch, GET_LIST_PRODUCT, data);
+    //   })
+    //   .catch(error => {
+    //     dispatchError(dispatch, GET_LIST_PRODUCT, error);
+    //     Alert.alert(error);
+    //   });
   };
 };
 

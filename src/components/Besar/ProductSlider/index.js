@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Text, StyleSheet, View, Modal} from 'react-native';
-import ImageViewer from 'react-native-image-zoom-viewer';
+// import ImageViewer from 'react-native-image-zoom-viewer';
 import {SliderBox} from 'react-native-image-slider-box';
 import {responsiveHeight, colors, responsiveWidth} from '../../../utils';
 

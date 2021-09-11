@@ -12,7 +12,7 @@ import {
 } from '../../utils';
 import {getKotaList, getProvinsiList} from '../../actions/RajaOngkirAction';
 import {Default} from '../../assets';
-// import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
+import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
 import {updateProfile} from '../../actions/ProfileAction';
 
 class EditProfile extends Component {
@@ -77,32 +77,32 @@ class EditProfile extends Component {
     this.props.dispatch(getKotaList(provinsi));
   };
 
-  // getImage = () => {
-  //   launchImageLibrary(
-  //     {
-  //       quality: 1,
-  //       Width: 500,
-  //       Height: 500,
-  //       includeBase64: true,
-  //       selectionLimit: 1,
-  //       cameraType: 'front',
-  //     },
-  //     response => {
-  //       if (response.didCancel || response.errorCode || response.errorMessage) {
-  //         Alert.alert('Error', 'Maaf sepertinya anda tidak memilih fotonya');
-  //       } else {
-  //         const source = response.assets[0].uri;
-  //         const fileString = `data:${response.assets[0].type};base64,${response.assets[0].base64}`;
+  getImage = () => {
+    launchImageLibrary(
+      {
+        quality: 1,
+        Width: 500,
+        Height: 500,
+        includeBase64: true,
+        selectionLimit: 1,
+        cameraType: 'front',
+      },
+      response => {
+        if (response.didCancel || response.errorCode || response.errorMessage) {
+          Alert.alert('Error', 'Maaf sepertinya anda tidak memilih fotonya');
+        } else {
+          const source = response.assets[0].uri;
+          const fileString = `data:${response.assets[0].type};base64,${response.assets[0].base64}`;
 
-  //         this.setState({
-  //           avatar: source,
-  //           avatarForDB: fileString,
-  //           updateAvatar: true,
-  //         });
-  //       }
-  //     },
-  //   );
-  // };
+          this.setState({
+            avatar: source,
+            avatarForDB: fileString,
+            updateAvatar: true,
+          });
+        }
+      },
+    );
+  };
 
   onSubmit = () => {
     const {nama, alamat, nohp, provinsi, kota} = this.state;
@@ -140,14 +140,14 @@ class EditProfile extends Component {
                 style={styles.foto}
               />
             </View>
-            {/* <View style={styles.tombolChangePhoto}>
+            <View style={styles.tombolChangePhoto}>
               <Tombol
                 tittle="Change-Foto"
                 type="text"
                 padding={5}
                 onPress={() => this.getImage()}
               />
-            </View> */}
+            </View>
           </View>
           <Inputan
             label="Nama"
