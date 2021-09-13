@@ -21,7 +21,7 @@ import {
 import {RFValue} from 'react-native-responsive-fontsize';
 import {connect} from 'react-redux';
 import {getDetailFitur} from '../../actions/FiturAction';
-import {masukKeranjang} from '../../actions/KeranjangAction';
+// import {masukKeranjang} from '../../actions/KeranjangAction';
 import {dummyProduct} from '../../data';
 
 class ProductDetail extends Component {
@@ -54,28 +54,28 @@ class ProductDetail extends Component {
     }
   }
 
-  masukKeranjang = () => {
-    const {jumlah, keterangan, pilihan} = this.state;
-    getData('user').then(res => {
-      if (res) {
-        //ambil user uid simpan di state
-        this.setState({
-          uid: res.uid,
-        });
+  // masukKeranjang = () => {
+  //   const {jumlah, keterangan, pilihan} = this.state;
+  //   getData('user').then(res => {
+  //     if (res) {
+  //       //ambil user uid simpan di state
+  //       this.setState({
+  //         uid: res.uid,
+  //       });
 
-        //validasi form
-        if (jumlah && pilihan && keterangan) {
-          //dispatch ke action masukKeranjang
-          this.props.dispatch(masukKeranjang(this.state));
-        } else {
-          Alert.alert('Error', 'Jumlah, pilihan & Keterangan harus diisi');
-        }
-      } else {
-        Alert.alert('Info', 'Silahkan Login Terlebih Dahulu');
-        this.props.navigation.replace('Login');
-      }
-    });
-  };
+  //       //validasi form
+  //       if (jumlah && pilihan && keterangan) {
+  //         //dispatch ke action masukKeranjang
+  //         this.props.dispatch(masukKeranjang(this.state));
+  //       } else {
+  //         Alert.alert('Error', 'Jumlah, pilihan & Keterangan harus diisi');
+  //       }
+  //     } else {
+  //       Alert.alert('Info', 'Silahkan Login Terlebih Dahulu');
+  //       this.props.navigation.replace('Login');
+  //     }
+  //   });
+  // };
 
   render() {
     const {navigation, getDetailProductResult, saveKeranjangLoading} =

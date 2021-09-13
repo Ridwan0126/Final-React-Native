@@ -71,8 +71,6 @@ const styles = StyleSheet.create({
     fontFamily: fonts.primary.regular,
   }),
   input: (fontSize, width, height) => ({
-    // width: 100,
-    // height: 30,
     fontSize: fontSize ? fontSize : 18,
     width: width,
     height: height,

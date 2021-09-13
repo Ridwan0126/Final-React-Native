@@ -36,10 +36,8 @@ class ListProduct extends Component {
 
   componentDidMount() {
     this._unsubscribe = this.props.navigation.addListener('focus', () => {
-      const {idProduct, keyword} = this.props;
+      const {idProduct} = this.props;
       console.log('Id DI Didmount', idProduct);
-      // this.props.dispatch(getListFitur());
-      // this.props.dispatch(getListProduct(idProduct, keyword));
       this.props.dispatch(GetContoh());
     });
   }
@@ -61,28 +59,15 @@ class ListProduct extends Component {
   }
 
   render() {
-    const {
-      navigation,
-      // Fitur,
-      keyword,
-      getListContohLoading,
-      getListContohResult,
-      getListContohError,
-    } = this.props;
-    const {dummyFitur, dummyProduct} = this.state;
+    const {navigation} = this.props;
+    const {dummyProduct} = this.state;
     console.log('API DI LIST PRODUCT', dummyProduct);
     return (
       <View style={styles.page}>
-        {/* <HeaderComponent navigation={navigation} page="ListProduct" /> */}
         <ScrollView
           showsVerticalScrollIndicator={false}
           style={styles.container}>
-          {/* <ListProducts navigation={navigation} Product={dummyProduct} /> */}
           <Jarak height={25} />
-          {/* <View style={styles.Fitur}>
-            <Text>{dummyProduct.jumlah}</Text> */}
-          {/* <ListFitur navigation={navigation} fitur={dummyFitur} /> */}
-          {/* </View> */}
           <View>
             <TextInput
               placeholder="Cari Wilayah Objek Pajak Anda"
@@ -104,36 +89,8 @@ class ListProduct extends Component {
             <View>
               <View></View>
             </View>
-            {/* {getListContohResult ? (
-              Object.keys(getListContohResult).map(id => {
-                return (
-                  
-                );
-              })
-            ) : getListContohLoading ? (
-              <View style={styles.loading}>
-                <ActivityIndicator color={colors.primary} />
-              </View>
-            ) : getListContohError ? (
-              <Text>{getListContohError}</Text>
-            ) : (
-              <Text>Data Kosong</Text>
-            )} */}
           </View>
-          {/* <View style={styles.Product}> */}
-          {/* {keyword ? (
-              <Text style={styles.label}>
-                Cari : <Text style={styles.boldLabel}>{keyword}</Text>
-              </Text>
-            ) : (
-              <Text style={styles.label}>
-                <Text style={styles.boldLabel}>Product </Text>
-                {namaFitur ? namaFitur : 'Yang Anda Mau'}
-              </Text>
-            )} */}
           <ListProducts navigation={navigation} Product={dummyProduct} />
-          {/* </View> */}
-          {/* <Jarak height={85} /> */}
         </ScrollView>
       </View>
     );

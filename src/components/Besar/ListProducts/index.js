@@ -11,9 +11,6 @@ import {connect} from 'react-redux';
 import {colors, responsiveWidth} from '../../../utils';
 
 const ListProducts = ({
-  // getListProductLoading,
-  // getListProductResult,
-  // getListProductError,
   Product,
   getListContohLoading,
   getListContohResult,
@@ -21,9 +18,6 @@ const ListProducts = ({
   navigation,
 }) => {
   const Tombols = props => {
-    // const toProductByFitur = () => {
-    //   navigation.navigate('CheckOut');
-    // };
     return (
       <View>
         <TouchableOpacity onPress={() => navigation.navigate('PBB')}>
@@ -104,10 +98,6 @@ const ListProducts = ({
 };
 
 const mapStateToProps = state => ({
-  // getListProductLoading: state.ProductReducer.getListProductLoading,
-  // getListProductResult: state.ProductReducer.getListProductResult,
-  // getListProductError: state.ProductReducer.getListProductError,
-
   getListContohLoading: state.ContohReducer.getListContohLoading,
   getListContohResult: state.ContohReducer.getListContohResult,
   getListContohError: state.ContohReducer.getListContohError,
@@ -117,10 +107,8 @@ export default connect(mapStateToProps, null)(ListProducts);
 
 const styles = StyleSheet.create({
   container: {
-    // flexDirection: 'row',
     flexWrap: 'wrap',
     justifyContent: 'space-between',
-    // marginTop: 20,
   },
   loading: {
     flex: 1,

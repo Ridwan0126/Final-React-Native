@@ -21,7 +21,6 @@ export default class ProductSlider extends Component {
         {
           url: this.props.images[index],
           props: {
-            // Or you can set source directory.
             source: this.props.images[index],
           },
         },

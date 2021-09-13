@@ -35,8 +35,6 @@ export const GetContoh = () => {
         }
       })
       .catch(error => {
-        // dispatchError(dispatch, GET_CONTOH, error.message);
-        // Alert.alert(error.message);
         console.log('asasasasasasasasasasas', error.message);
       });
   };
@@ -50,7 +48,6 @@ export const getProvinsiList = () => {
     axios({
       method: 'get',
       url: API_RAJAONGKIR + 'province',
-      // url: 'https://api.rajaongkir.com/starter/province',
       timeout: API_TIMEOUT,
       headers: API_HEADER_RAJAONGKIR,
     })
@@ -82,7 +79,6 @@ export const getKotaList = provinsi_id => {
     axios({
       method: 'get',
       url: API_RAJAONGKIR + 'city?province=' + provinsi_id,
-      // url: 'https://api.rajaongkir.com/starter/province',
       timeout: API_TIMEOUT,
       headers: API_HEADER_RAJAONGKIR,
     })
@@ -133,58 +129,6 @@ export const getKotaDetail = kota_id => {
       .catch(error => {
         // ERROR
         dispatchError(dispatch, GET_KOTA_DETAIL, error);
-
-        alert(error);
-      });
-  };
-};
-
-export const postOngkir = (data, ekspedisi) => {
-  return dispatch => {
-    dispatchLoading(dispatch, POST_ONGKIR);
-
-    const formData = new URLSearchParams();
-    formData.append('origin', ORIGIN_CITY);
-
-    // --> destination data.profile.kota
-    formData.append('destination', data.profile.kota);
-
-    // --> berat => data.totalBerat
-    formData.append(
-      'weight',
-      data.totalBerat < 1 ? 1000 : data.totalBerat * 1000,
-    );
-
-    // --> courier => ekspedisi.kurir
-    formData.append('courier', ekspedisi.kurir);
-
-    axios({
-      method: 'POST',
-      url: API_RAJAONGKIR + 'cost',
-      timeout: API_TIMEOUT,
-      headers: API_HEADER_RAJAONGKIR_COST,
-      data: formData,
-    })
-      .then(response => {
-        if (response.status !== 200) {
-          // ERROR
-          dispatchError(dispatch, POST_ONGKIR, response);
-        } else {
-          const ongkirs = response.data.rajaongkir.results[0].costs;
-
-          const ongkirYangDipilih = ongkirs
-            .filter(ongkir => ongkir.service === ekspedisi.service)
-            .map(filterOngkir => {
-              return filterOngkir;
-            });
-
-          //SUKSES
-          dispatchSuccess(dispatch, POST_ONGKIR, ongkirYangDipilih[0]);
-        }
-      })
-      .catch(error => {
-        // ERROR
-        dispatchError(dispatch, POST_ONGKIR, error);
 
         alert(error);
       });

@@ -37,7 +37,7 @@ class Register2 extends Component {
     const {registerResult} = this.props;
 
     if (registerResult && prevProps.registerResult !== registerResult) {
-      this.props.navigation.replace('MainApp');
+      this.props.navigation.replace('Profile');
     }
   }
 
