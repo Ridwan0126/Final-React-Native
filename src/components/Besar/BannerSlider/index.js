@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {StyleSheet, View} from 'react-native';
-import {Slider1, Slider2} from '../../../assets';
+import {Slider3, Slider4, Slider5, Slider8, Slider9} from '../../../assets';
 import {SliderBox} from 'react-native-image-slider-box';
 import {colors, responsiveHeight, responsiveWidth} from '../../../utils';
 
@@ -9,7 +9,7 @@ export default class BannerSlider extends Component {
     super(props);
 
     this.state = {
-      images: [Slider1, Slider2],
+      images: [Slider3, Slider4, Slider5, Slider8, Slider9],
     };
   }
 
