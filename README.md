@@ -9,6 +9,7 @@
 
 <p>
 Saya sudah memperbaiki bug yang ada di aplikasi saya, sehingga beberapa fitur sudah bisa di gunakan kembali, beberapa fitur yang saya perbaharui yaitu :
+  
   1. Edit profile 
   2. Change password 
   3. Cari NOP
