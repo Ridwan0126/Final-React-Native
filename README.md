@@ -27,7 +27,7 @@ Saya sudah memperbaiki bug yang ada di aplikasi saya, sehingga beberapa fitur su
   5. PBB
   6. Pembayaran
   
-  Backend yang saya gunakan yaitu JAVA, Firebase, dan tambahan raja onkgir ( untuk get kota dan provinsi )
+  Backend yang saya gunakan yaitu JAVA, Firebase, dan tambahan raja onkgir ( untuk get kota dan provinsi ), Midtrans ( untuk pembayaran )
 </p>
 
 <h1>Splash Screen</h1>
