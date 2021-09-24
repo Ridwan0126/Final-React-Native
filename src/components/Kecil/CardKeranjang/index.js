@@ -1,7 +1,7 @@
 import React from 'react';
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {connect} from 'react-redux';
-import {IconHapus} from '../../../assets';
+import {Hapus} from '../../../assets';
 import {
   colors,
   fonts,
@@ -28,7 +28,7 @@ const CardKeranjang = ({keranjang, keranjangUtama, id, dispatch}) => {
       </View>
 
       <TouchableOpacity style={styles.hapus} onPress={() => hapusKeranjang()}>
-        <IconHapus />
+        <Hapus />
       </TouchableOpacity>
     </View>
   );

@@ -149,21 +149,7 @@ class Checkout extends Component {
             </Text>
           </View>
 
-          <Pilihan
-            label="Pilih Ekspedisi"
-            datas={ekspedisi}
-            selectedValue={ekspedisiSelected}
-            onValueChange={ekspedisiSelected =>
-              this.ubahEkspedisi(ekspedisiSelected)
-            }
-          />
           <Jarak height={10} />
-
-          <Text style={styles.textBold}>Biaya Admin :</Text>
-
-          <View style={styles.ongkir}>
-            <Text style={styles.textBold}>Rp. {numberWithCommas(ongkir)}</Text>
-          </View>
         </View>
 
         <View style={styles.footer}>

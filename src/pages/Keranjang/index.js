@@ -71,7 +71,6 @@ class Keranjang extends Component {
               onPress={() =>
                 this.props.navigation.navigate('Checkout', {
                   totalHarga: getListKeranjangResult.totalHarga,
-                  totalBerat: getListKeranjangResult.totalBerat,
                 })
               }
             />
