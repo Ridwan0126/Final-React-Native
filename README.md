@@ -27,4 +27,4 @@ Saya sudah memperbaiki bug yang ada di aplikasi saya, sehingga beberapa fitur su
   Backend yang saya gunakan yaitu JAVA, Firebase, dan tambahan raja onkgir ( untuk get kota dan provinsi )
 </p>
 
-
+![Sc01](https://user-images.githubusercontent.com/82155376/134633368-fd4ca2d9-3cb6-4922-8189-58649dc927c9.jpg)
