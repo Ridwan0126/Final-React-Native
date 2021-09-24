@@ -1,17 +1,20 @@
 import React from 'react';
-import {Image, StyleSheet, TouchableOpacity} from 'react-native';
+import {StyleSheet, Image, TouchableOpacity, Text} from 'react-native';
 import {connect} from 'react-redux';
 import {colors, responsiveHeight, responsiveWidth} from '../../../utils';
 
 const CardFitur = ({fitur, navigation, id}) => {
-  const toProductByFitur = () => {
-    navigation.navigate('ListProduct');
+  const toJerseyByFitur = () => {
+    // navigate ke ListJersey
+    navigation.navigate('CariLokasi');
   };
+
   return (
     <TouchableOpacity
       style={styles.container}
-      onPress={() => toProductByFitur(id, fitur.namaFitur)}>
-      <Image source={fitur.gambar} style={styles.Fiturs} />
+      onPress={() => toJerseyByFitur(id, fitur.namaFitur)}>
+      <Image source={{uri: fitur.image}} style={styles.logo} />
+      <Text>{fitur.namaFitur}</Text>
     </TouchableOpacity>
   );
 };
@@ -24,17 +27,17 @@ const styles = StyleSheet.create({
     shadowColor: '#000',
     shadowOffset: {
       width: 0,
-      height: 8,
+      height: 2,
     },
-    shadowOpacity: 0.44,
-    shadowRadius: 10.32,
-
-    elevation: 16,
-    padding: 8,
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
+    padding: 10,
     borderRadius: 15,
+    marginLeft: 30,
   },
-  Fiturs: {
-    width: responsiveWidth(35),
-    height: responsiveHeight(45),
+  logo: {
+    width: responsiveWidth(37),
+    height: responsiveHeight(50),
   },
 });

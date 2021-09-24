@@ -4,6 +4,7 @@ import {
   GET_KOTA_DETAIL,
   POST_ONGKIR,
 } from '../../actions/RajaOngkirAction';
+
 const initialState = {
   getProvinsiLoading: false,
   getProvinsiResult: false,
@@ -25,21 +26,21 @@ const initialState = {
 export default function (state = initialState, action) {
   switch (action.type) {
     case GET_PROVINSI:
-      console.log('Get Provinsi', action);
       return {
         ...state,
         getProvinsiLoading: action.payload.loading,
         getProvinsiResult: action.payload.data,
         getProvinsiError: action.payload.errorMessage,
       };
+
     case GET_KOTA:
-      console.log('Get Kota', action);
       return {
         ...state,
         getKotaLoading: action.payload.loading,
         getKotaResult: action.payload.data,
         getKotaError: action.payload.errorMessage,
       };
+
     case GET_KOTA_DETAIL:
       return {
         ...state,

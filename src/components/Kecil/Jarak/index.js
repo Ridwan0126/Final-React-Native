@@ -1,7 +1,7 @@
 import React from 'react';
-import {View, Text} from 'react-native';
+import {View} from 'react-native';
 
-const Jarak = ({width, height}) => {
+const Jarak = ({height, width}) => {
   return <View style={{height: height, width: width}} />;
 };
 

@@ -1,35 +1,35 @@
 import Home from './Home';
-import Profile from './Profile';
-import ListProduct from './ListProduct';
 import Splash from './Splash';
-import ProductDetail from './ProductDetail';
+import ListPbb from './ListPbb';
+import Profile from './Profile';
+import PbbDetail from './PbbDetail';
 import Keranjang from './Keranjang';
-import ChectOut from './CheckOut';
+import Checkout from './Checkout';
 import EditProfile from './EditProfile';
 import ChangePassword from './ChangePassword';
 import History from './History';
 import Login from './Login';
 import Register1 from './Register/Register1';
 import Register2 from './Register/Register2';
-import PBB from './PBB';
-import Pembayaran from './Pembayaran';
-import BayarTagihan from './BayarTagihan';
+import Midtrans from './Midtrans';
+import CariLokasi from './CariLokasi';
+import Awal from './Awal';
 
 export {
-  Register1,
-  Register2,
-  Login,
-  History,
-  ChangePassword,
-  EditProfile,
-  ChectOut,
-  Keranjang,
   Home,
   Splash,
+  ListPbb,
   Profile,
-  ListProduct,
-  ProductDetail,
-  PBB,
-  Pembayaran,
-  BayarTagihan,
+  PbbDetail,
+  Keranjang,
+  Checkout,
+  EditProfile,
+  ChangePassword,
+  History,
+  Login,
+  Register1,
+  Register2,
+  Midtrans,
+  CariLokasi,
+  Awal,
 };

@@ -3,15 +3,14 @@ import {
   Text,
   StyleSheet,
   View,
-  TouchableWithoutFeedback,
   KeyboardAvoidingView,
-  Platform,
+  TouchableWithoutFeedback,
   Keyboard,
   ScrollView,
   Alert,
 } from 'react-native';
-import {Reg1} from '../../assets';
 import {colors, fonts, responsiveWidth} from '../../utils';
+import {Reg1} from '../../assets';
 import {Inputan, Jarak, Tombol} from '../../components';
 
 export default class Register1 extends Component {
@@ -31,7 +30,10 @@ export default class Register1 extends Component {
     if (nama && email && nohp && password) {
       this.props.navigation.navigate('Register2', this.state);
     } else {
-      Alert.alert('ERROR', 'Nama, Email, No.Hp dan Password Wajib di Isi');
+      Alert.alert(
+        'Error',
+        'Nama, email, no. handphone, dan password harus diisi',
+      );
     }
   };
 
@@ -45,14 +47,24 @@ export default class Register1 extends Component {
           <ScrollView showsVerticalScrollIndicator={false}>
             <View style={styles.btnBack}>
               <Tombol
-                icon="KembaliHitam"
+                icon="arrow-left"
                 onPress={() => this.props.navigation.goBack()}
               />
             </View>
+
             <View style={styles.ilustrasi}>
               <Reg1 />
-              <Text style={styles.title}> Sign Up </Text>
+              <Jarak height={5} />
+              <Text style={styles.title}>Sign Up</Text>
+              {/* <Text style={styles.title}>Isi Daftar Diri Anda</Text> */}
+
+              <View style={styles.wrapperCircle}>
+                <View style={styles.circlePrimary}></View>
+                <Jarak width={10} />
+                <View style={styles.circleDisabled}></View>
+              </View>
             </View>
+
             <View style={styles.card}>
               <Inputan
                 label="Nama"
@@ -76,22 +88,15 @@ export default class Register1 extends Component {
                 value={password}
                 onChangeText={password => this.setState({password})}
               />
-              <Jarak height={20} />
+              <Jarak height={25} />
               <Tombol
-                tittle="Continue"
+                title="Continue"
                 type="textIcon"
                 icon="submit"
-                padding={15}
-                fontSize={24}
+                padding={10}
+                fontSize={18}
                 onPress={() => this.onContinue()}
               />
-            </View>
-            <View style={styles.ilustrasi}>
-              <View style={styles.wrapperCircle}>
-                <View style={styles.circlePrimary}></View>
-                <Jarak width={10} />
-                <View style={styles.circleDisabled}></View>
-              </View>
             </View>
           </ScrollView>
         </TouchableWithoutFeedback>
@@ -104,7 +109,7 @@ const styles = StyleSheet.create({
   page: {
     flex: 1,
     backgroundColor: colors.white,
-    paddingTop: 30,
+    paddingTop: 20,
   },
   ilustrasi: {
     alignItems: 'center',
@@ -137,21 +142,21 @@ const styles = StyleSheet.create({
     shadowColor: '#000',
     shadowOffset: {
       width: 0,
-      height: 6,
+      height: 2,
     },
-    shadowOpacity: 0.39,
-    shadowRadius: 8.3,
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
 
-    elevation: 13,
+    elevation: 5,
     paddingHorizontal: 30,
     paddingBottom: 20,
     paddingTop: 10,
     borderRadius: 10,
-    marginTop: 15,
+    marginTop: 10,
     marginBottom: 10,
   },
   btnBack: {
-    marginLeft: 20,
+    marginLeft: 30,
     position: 'absolute',
   },
 });

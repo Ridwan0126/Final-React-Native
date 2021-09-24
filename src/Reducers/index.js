@@ -1,12 +1,14 @@
 import {combineReducers} from 'redux';
-import UserReducer from './User';
+import UserReducer from './user';
 import RajaOngkirReducer from './rajaongkir';
 import AuthReducer from './auth';
 import ProfileReducer from './profile';
 import FiturReducer from './fitur';
-import ProductReducer from './Products';
+import PbbReducer from './pbb';
 import KeranjangReducer from './keranjang';
-import ContohReducer from './Contoh';
+import PaymentReducer from './payment';
+import PesananReducer from './pesanan';
+import HistoryReducer from './history';
 
 const rootReducer = combineReducers({
   UserReducer,
@@ -14,9 +16,11 @@ const rootReducer = combineReducers({
   AuthReducer,
   ProfileReducer,
   FiturReducer,
-  ProductReducer,
+  PbbReducer,
   KeranjangReducer,
-  ContohReducer,
+  PaymentReducer,
+  PesananReducer,
+  HistoryReducer,
 });
 
 export default rootReducer;

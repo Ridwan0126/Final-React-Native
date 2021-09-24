@@ -1,63 +1,33 @@
 import React, {Component} from 'react';
-import {
-  Text,
-  StyleSheet,
-  View,
-  ActivityIndicator,
-  ScrollView,
-} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import {connect} from 'react-redux';
 import {ListHistory} from '../../components';
-import {dummyPesanans} from '../../data';
-import {colors} from '../../utils';
+import {colors, getData} from '../../utils';
+import {getListHistory} from '../../actions/HistoryAction';
 
-const History = ({
-  getListContohLoading,
-  getListContohResult,
-  getListContohError,
-  navigation,
-}) => {
-  // class History extends Component {
-  // render() {
-  //   const {
-  //     getListContohLoading,
-  //     getListContohResult,
-  //     getListContohError,
-  //     navigation,
-  //   } = this.props;
-  //   // const {pesanans} = this.state;
-  console.log('DATA KERANJANG ===>', getListContohResult);
-  return (
-    <View style={styles.pages}>
-      <ScrollView showsVerticalScrollIndicator={false}>
-        {getListContohResult ? (
-          getListContohResult.map(item => {
-            console.log('ITEM API DI KERANJANG', item);
-            return <ListHistory pesanans={item} />;
-          })
-        ) : getListContohLoading ? (
-          <View style={styles.loading}>
-            <ActivityIndicator color={colors.primary} />
-          </View>
-        ) : getListContohError ? (
-          <Text>{getListContohError}</Text>
-        ) : (
-          <Text>Data Kosong</Text>
-        )}
-      </ScrollView>
-    </View>
-  );
-};
-// }
-// };
+class History extends Component {
+  componentDidMount() {
+    getData('user').then(res => {
+      const data = res;
 
-const mapStateToProps = state => ({
-  getListContohLoading: state.ContohReducer.getListContohLoading,
-  getListContohResult: state.ContohReducer.getListContohResult,
-  getListContohError: state.ContohReducer.getListContohError,
-});
+      if (!data) {
+        this.props.navigation.replace('Login');
+      } else {
+        this.props.dispatch(getListHistory(data.uid));
+      }
+    });
+  }
 
-export default connect(mapStateToProps, null)(History);
+  render() {
+    return (
+      <View style={styles.pages}>
+        <ListHistory navigation={this.props.navigation} />
+      </View>
+    );
+  }
+}
+
+export default connect()(History);
 
 const styles = StyleSheet.create({
   pages: {

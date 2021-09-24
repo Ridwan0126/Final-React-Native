@@ -8,6 +8,7 @@ export const CHANGE_PASSWORD = 'CHANGE_PASSWORD';
 
 export const updateProfile = data => {
   return dispatch => {
+    // LOADING
     dispatchLoading(dispatch, UPDATE_PROFILE);
 
     const dataBaru = {
@@ -26,14 +27,17 @@ export const updateProfile = data => {
       .ref('users/' + dataBaru.uid)
       .update(dataBaru)
       .then(response => {
+        //SUKSES
         dispatchSuccess(dispatch, UPDATE_PROFILE, response ? response : []);
 
         //Local Storage (Async Storage)
         storeData('user', dataBaru);
       })
       .catch(error => {
+        // ERROR
         dispatchError(dispatch, UPDATE_PROFILE, error.message);
-        Alert.alert(error.message);
+
+        alert(error.message);
       });
   };
 };

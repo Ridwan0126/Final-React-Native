@@ -1,33 +1,31 @@
 import React from 'react';
-import {StyleSheet, Text, TouchableOpacity} from 'react-native';
-import {Kanan, Kembali, Keranjang, Kembali2} from '../../../assets/Icons';
+import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {Keranjang, IconKeranjang, Kembali, Kanan} from '../../../assets';
 import {colors, fonts} from '../../../utils';
 import Jarak from '../Jarak';
 
-const TextIcon = ({onPress, icon, padding, tittle, fontSize, disabled}) => {
+const TextIcon = ({icon, padding, onPress, title, fontSize, disabled}) => {
   const Icon = () => {
-    if (icon === 'Keranjang') {
+    if (icon === 'keranjang') {
       return <Keranjang />;
-    } else if (icon === 'Kembali') {
+    } else if (icon === 'arrow-left') {
       return <Kembali />;
-    } else if (icon === 'KeranjangMasuk') {
+    } else if (icon === 'keranjang-putih') {
       return <Keranjang />;
     } else if (icon === 'submit') {
       return <Kanan />;
-    } else if (icon === 'KembaliHitam') {
-      return <Kembali2 />;
     }
 
-    return <Keranjang />;
+    return <IconKeranjang />;
   };
 
   return (
     <TouchableOpacity
-      style={styles.container(disabled, padding)}
+      style={styles.container(padding, disabled)}
       onPress={onPress}>
       <Icon />
       <Jarak width={5} />
-      <Text style={styles.title(fontSize)}>{tittle}</Text>
+      <Text style={styles.title(fontSize)}>{title}</Text>
     </TouchableOpacity>
   );
 };
@@ -37,14 +35,13 @@ export default TextIcon;
 const styles = StyleSheet.create({
   container: (padding, disabled) => ({
     backgroundColor: disabled ? colors.border : colors.primary,
-    padding: 5,
+    padding: padding,
     borderRadius: 5,
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: 20,
   }),
-  title: fontSize => ({
+  title: (fontSize) => ({
     color: colors.white,
     fontSize: fontSize ? fontSize : 15,
     fontFamily: fonts.primary.bold,

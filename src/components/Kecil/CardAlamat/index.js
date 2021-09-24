@@ -5,10 +5,10 @@ import {colors, fonts} from '../../../utils';
 const CardAlamat = ({alamat, provinsi, kota, navigation}) => {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Alamat :</Text>
-      <Text style={styles.alamat}>{alamat}</Text>
+      <Text style={styles.title}>Alamat Saya :</Text>
+      <Text style={styles.alamat}>{alamat} </Text>
       <Text style={styles.alamat}>{kota}</Text>
-      <Text style={styles.alamat}>Provinsi : {provinsi}</Text>
+      <Text style={styles.alamat}>Provinsi {provinsi}</Text>
       <TouchableOpacity onPress={() => navigation.navigate('EditProfile')}>
         <Text style={styles.ubahAlamat}>Ubah Alamat</Text>
       </TouchableOpacity>
@@ -24,12 +24,12 @@ const styles = StyleSheet.create({
     shadowColor: '#000',
     shadowOffset: {
       width: 0,
-      height: 6,
+      height: 2,
     },
-    shadowOpacity: 0.39,
-    shadowRadius: 8.3,
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
 
-    elevation: 13,
+    elevation: 5,
     padding: 15,
     borderRadius: 10,
     marginTop: 10,

@@ -20,13 +20,15 @@ export const dispatchSuccess = (dispatch, type, result) => {
   });
 };
 
+
 export const dispatchError = (dispatch, type, error) => {
-  return dispatch({
-    type: type,
-    payload: {
-      loading: false,
-      data: false,
-      errorMessage: error,
-    },
-  });
-};
+    return dispatch({
+      type: type,
+      payload: {
+        loading: false,
+        data: false,
+        errorMessage: error,
+      },
+    });
+  };
+  

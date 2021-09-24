@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
-import {Text, StyleSheet, View, ScrollView, Alert} from 'react-native';
+import {Alert, StyleSheet, View} from 'react-native';
+import {colors, getData, responsiveHeight} from '../../utils';
+import {Inputan, Tombol} from '../../components';
 import {connect} from 'react-redux';
 import {changePassword} from '../../actions/ProfileAction';
-import {Inputan, Tombol} from '../../components';
-import {colors, getData, responsiveHeight} from '../../utils';
 
 class ChangePassword extends Component {
   constructor(props) {
@@ -18,6 +18,7 @@ class ChangePassword extends Component {
 
   onSubmit = () => {
     const {password, newPassword, newPasswordConfirmation} = this.state;
+
     if (newPassword !== newPasswordConfirmation) {
       Alert.alert(
         'Error',
@@ -31,6 +32,7 @@ class ChangePassword extends Component {
           password: password,
           newPassword: newPassword,
         };
+
         this.props.dispatch(changePassword(parameter));
       });
     } else {
@@ -59,7 +61,7 @@ class ChangePassword extends Component {
     const {changePasswordLoading} = this.props;
 
     return (
-      <View style={styles.page}>
+      <View style={styles.pages}>
         <View>
           <Inputan
             label="Password Lama"
@@ -74,7 +76,7 @@ class ChangePassword extends Component {
             onChangeText={newPassword => this.setState({newPassword})}
           />
           <Inputan
-            label="Confirm Password"
+            label="Konfirmasi Password Baru"
             secureTextEntry
             value={newPasswordConfirmation}
             onChangeText={newPasswordConfirmation =>
@@ -85,11 +87,11 @@ class ChangePassword extends Component {
 
         <View style={styles.submit}>
           <Tombol
-            tittle="Submit"
+            title="Submit"
             type="textIcon"
             icon="submit"
-            padding={responsiveHeight(20)}
-            fontSize={20}
+            padding={responsiveHeight(15)}
+            fontSize={18}
             onPress={() => this.onSubmit()}
             loading={changePasswordLoading}
           />
@@ -108,14 +110,13 @@ const mapStateToProps = state => ({
 export default connect(mapStateToProps, null)(ChangePassword);
 
 const styles = StyleSheet.create({
-  page: {
+  pages: {
     flex: 1,
     backgroundColor: colors.white,
     paddingHorizontal: 30,
     paddingTop: 10,
     justifyContent: 'space-between',
   },
-
   submit: {
     marginVertical: 30,
   },

@@ -1,17 +1,17 @@
 import React, {Component} from 'react';
-import {Text, StyleSheet, View, Image, StatusBar} from 'react-native';
-import {dummyMenu, dummyProfile} from '../../data';
+import {Text, StyleSheet, View, Image} from 'react-native';
 import {
   colors,
   fonts,
-  heightMobileUI,
+  getData,
   responsiveHeight,
   responsiveWidth,
-  getData,
 } from '../../utils';
+import {dummyMenu} from '../../data';
 import {RFValue} from 'react-native-responsive-fontsize';
-import {ListMenu} from '../../components/Besar';
-import {Default} from '../../assets';
+import {heightMobileUI} from '../../utils/constant';
+import {ListMenu} from '../../components';
+import {DefaultImage} from '../../assets';
 
 export default class Profile extends Component {
   constructor(props) {
@@ -25,7 +25,6 @@ export default class Profile extends Component {
 
   componentDidMount() {
     this._unsubscribe = this.props.navigation.addListener('focus', () => {
-      // console.log('Dioasang');
       this.getUserData();
     });
   }
@@ -43,7 +42,7 @@ export default class Profile extends Component {
           profile: data,
         });
       } else {
-        // this.props.navigation.replace('Login');
+        this.props.navigation.replace('Login');
       }
     });
   };
@@ -51,18 +50,18 @@ export default class Profile extends Component {
   render() {
     const {profile, menus} = this.state;
     return (
-      <View style={styles.container}>
-        <StatusBar backgroundColor="#0000E6" />
-        <View style={styles.cont}>
+      <View style={styles.page}>
+        <View style={styles.container}>
           <Image
-            source={profile.avatar ? {uri: profile.avatar} : Default}
+            source={profile.avatar ? {uri: profile.avatar} : DefaultImage}
             style={styles.foto}
           />
           <View style={styles.profile}>
             <Text style={styles.nama}>{profile.nama}</Text>
-            <Text style={styles.deskripsi}>{profile.nohp}</Text>
-            <Text style={styles.deskripsi}>{profile.alamat}</Text>
+            <Text style={styles.desc}>No. HP : {profile.nohp}</Text>
+            <Text style={styles.desc}>{profile.alamat}</Text>
           </View>
+
           <ListMenu menus={menus} navigation={this.props.navigation} />
         </View>
       </View>
@@ -71,25 +70,25 @@ export default class Profile extends Component {
 }
 
 const styles = StyleSheet.create({
-  container: {
+  page: {
     flex: 1,
     backgroundColor: colors.primary,
   },
-  cont: {
+  container: {
     position: 'absolute',
     bottom: 0,
     height: responsiveHeight(680),
-    backgroundColor: colors.white,
     width: '100%',
+    backgroundColor: colors.white,
     borderTopRightRadius: 40,
     borderTopLeftRadius: 40,
   },
   foto: {
     width: responsiveWidth(150),
-    height: responsiveHeight(150),
-    borderRadius: 150,
+    height: responsiveWidth(150),
+    borderRadius: 40,
     alignSelf: 'center',
-    marginTop: responsiveWidth(-75),
+    marginTop: -responsiveWidth(75),
   },
   profile: {
     marginTop: 10,
@@ -99,7 +98,7 @@ const styles = StyleSheet.create({
     fontFamily: fonts.primary.bold,
     fontSize: RFValue(24, heightMobileUI),
   },
-  deskripsi: {
+  desc: {
     fontFamily: fonts.primary.regular,
     fontSize: RFValue(18, heightMobileUI),
   },

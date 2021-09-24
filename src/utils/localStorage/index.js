@@ -8,18 +8,19 @@ export const storeData = async (key, value) => {
   }
 };
 
-export const getData = async key => {
+
+export const getData = async (key) => {
   try {
-    const value = await AsyncStorage.getItem(key);
-    if (value !== null) {
+    const value = await AsyncStorage.getItem(key)
+    if(value !== null) {
       // value previously stored
-      return JSON.parse(value);
+      return JSON.parse(value)
     }
-  } catch (e) {
+  } catch(e) {
     // error reading value
   }
-};
+}
 
-export const clearStorage = async () => {
+export const clearStorage = async() => {
   AsyncStorage.clear();
-};
+}

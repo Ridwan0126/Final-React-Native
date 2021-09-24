@@ -11,17 +11,19 @@ const CardMenu = ({menu, navigation}) => {
         .signOut()
         .then(function () {
           // Sign-out successful.
+
           clearStorage();
           navigation.replace('Login');
         })
         .catch(function (error) {
           // An error happened.
-          // alert(error)
+          alert(error);
         });
     } else {
       navigation.navigate(menu.halaman);
     }
   };
+
   return (
     <TouchableOpacity style={styles.container} onPress={() => onSubmit()}>
       <View style={styles.menu}>

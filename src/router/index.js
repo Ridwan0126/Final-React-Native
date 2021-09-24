@@ -1,38 +1,33 @@
 import React from 'react';
-import {View, Text} from 'react-native';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {createStackNavigator} from '@react-navigation/stack';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {
   Home,
   Splash,
-  ListProduct,
+  ListPbb,
   Profile,
-  ProductDetail,
+  PbbDetail,
   Keranjang,
-  ChectOut,
+  Checkout,
   EditProfile,
   ChangePassword,
   History,
   Login,
   Register1,
   Register2,
-  PBB,
-  Pembayaran,
-  BayarTagihan,
+  Midtrans,
+  CariLokasi,
+  Awal,
 } from '../pages';
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {BottomNav} from '../components';
-const Stack = createNativeStackNavigator();
+import {BottomNavigator} from '../components';
+
+const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
 const MainApp = () => {
   return (
-    <Tab.Navigator tabBar={props => <BottomNav {...props} />}>
-      <Tab.Screen name="Home" component={Home} options={{headerShown: false}} />
-      {/* <Tab.Screen
-        name="ListProduct"
-        component={ListProduct}
-        options={{title: 'Product', headerShown: false}}
-      /> */}
+    <Tab.Navigator tabBar={props => <BottomNavigator {...props} />}>
+      <Tab.Screen name="Awal" component={Awal} options={{headerShown: false}} />
       <Tab.Screen
         name="Profile"
         component={Profile}
@@ -46,13 +41,18 @@ const Router = () => {
   return (
     <Stack.Navigator initialRouteName="Splash">
       <Stack.Screen
-        name="ListProduct"
-        component={ListProduct}
-        options={{title: 'PBB'}}
-      />
-      <Stack.Screen
         name="Splash"
         component={Splash}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="CariLokasi"
+        component={CariLokasi}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="Home"
+        component={Home}
         options={{headerShown: false}}
       />
       <Stack.Screen
@@ -60,13 +60,14 @@ const Router = () => {
         component={MainApp}
         options={{headerShown: false}}
       />
+      <Stack.Screen name="ListPbb" component={ListPbb} />
       <Stack.Screen
-        name="ProductDetail"
-        component={ProductDetail}
+        name="PbbDetail"
+        component={PbbDetail}
         options={{headerShown: false}}
       />
       <Stack.Screen name="Keranjang" component={Keranjang} />
-      <Stack.Screen name="CheckOut" component={ChectOut} />
+      <Stack.Screen name="Checkout" component={Checkout} />
       <Stack.Screen
         name="EditProfile"
         component={EditProfile}
@@ -85,7 +86,7 @@ const Router = () => {
       <Stack.Screen
         name="Login"
         component={Login}
-        // options={{headerShown: false}}
+        options={{headerShown: false}}
       />
       <Stack.Screen
         name="Register1"
@@ -97,9 +98,11 @@ const Router = () => {
         component={Register2}
         options={{headerShown: false}}
       />
-      <Stack.Screen name="PBB" component={PBB} />
-      <Stack.Screen name="BayarTagihan" component={BayarTagihan} />
-      <Stack.Screen name="Pembayaran" component={Pembayaran} />
+      <Stack.Screen
+        name="Midtrans"
+        component={Midtrans}
+        options={{title: 'Lanjutkan Pembayaran'}}
+      />
     </Stack.Navigator>
   );
 };

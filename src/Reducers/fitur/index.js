@@ -5,9 +5,9 @@ const initialState = {
   getListFiturResult: false,
   getListFiturError: false,
 
-  getDetailProductLoading: false,
-  getDetailProductResult: false,
-  getDetailProductError: false,
+  getDetailFiturLoading: false,
+  getDetailFiturResult: false,
+  getDetailFiturError: false,
 };
 
 export default function (state = initialState, action) {
@@ -23,9 +23,9 @@ export default function (state = initialState, action) {
     case GET_DETAIL_FITUR:
       return {
         ...state,
-        getDetailProductLoading: action.payload.loading,
-        getDetailProductResult: action.payload.data,
-        getDetailProductError: action.payload.errorMessage,
+        getDetailFiturLoading: action.payload.loading,
+        getDetailFiturResult: action.payload.data,
+        getDetailFiturError: action.payload.errorMessage,
       };
     default:
       return state;

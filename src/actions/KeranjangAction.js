@@ -13,20 +13,16 @@ export const masukKeranjang = data => {
     FIREBASE.database()
       .ref('keranjangs/' + data.uid)
       .once('value', querySnapshot => {
-        console.log('Ker01', querySnapshot.val());
         if (querySnapshot.val()) {
           //Update Keranjang Utama
           const keranjangUtama = querySnapshot.val();
-          const beratBaru =
-            parseInt(data.jumlah) * parseFloat(data.product.berat);
-          const hargaBaru =
-            parseInt(data.jumlah) * parseInt(data.product.harga);
+          const hargaBaru = parseInt(data.jumlah) * parseInt(data.pbb.tagihan);
+
           FIREBASE.database()
             .ref('keranjangs')
             .child(data.uid)
             .update({
               totalHarga: keranjangUtama.totalHarga + hargaBaru,
-              totalBerat: keranjangUtama.totalBerat + beratBaru,
             })
             .then(response => {
               //Simpan Ke Keranjang Detail
@@ -41,8 +37,7 @@ export const masukKeranjang = data => {
           const keranjangUtama = {
             user: data.uid,
             tanggal: new Date().toDateString(),
-            totalHarga: parseInt(data.jumlah) * parseInt(data.product.harga),
-            totalBerat: parseInt(data.jumlah) * parseFloat(data.product.berat),
+            totalHarga: parseInt(data.jumlah) * parseInt(data.pbb.tagihan),
           };
 
           FIREBASE.database()
@@ -50,7 +45,6 @@ export const masukKeranjang = data => {
             .child(data.uid)
             .set(keranjangUtama)
             .then(response => {
-              console.log('Ker02', response);
               //Simpan Ke Keranjang Detail
               dispatch(masukKeranjangDetail(data));
             })
@@ -70,26 +64,24 @@ export const masukKeranjang = data => {
 export const masukKeranjangDetail = data => {
   return dispatch => {
     const pesanans = {
-      product: data.product,
+      product: data.pbb,
       jumlahPesan: data.jumlah,
-      totalHarga: parseInt(data.jumlah) * parseInt(data.product.harga),
-      totalBerat: parseInt(data.jumlah) * parseFloat(data.product.berat),
+      totalHarga: parseInt(data.jumlah) * parseInt(data.pbb.tagihan),
       keterangan: data.keterangan,
-      pilihan: data.pilihan,
+      ukuran: data.ukuran,
     };
 
-    // FIREBASE.database()
-    //   .ref('keranjangs/' + data.uid)
-    //   .child('pesanans')
-    //   .push(pesanans)
-    //   .then(response => {
-    //     console.log('Sipman Ker', response);
-    //     dispatchSuccess(dispatch, MASUK_KERANJANG, response ? response : []);
-    //   })
-    //   .catch(error => {
-    //     dispatchError(dispatch, MASUK_KERANJANG, error);
-    //     alert(error);
-    //   });
+    FIREBASE.database()
+      .ref('keranjangs/' + data.uid)
+      .child('pesanans')
+      .push(pesanans)
+      .then(response => {
+        dispatchSuccess(dispatch, MASUK_KERANJANG, response ? response : []);
+      })
+      .catch(error => {
+        dispatchError(dispatch, MASUK_KERANJANG, error);
+        alert(error);
+      });
   };
 };
 
@@ -97,18 +89,18 @@ export const getListKeranjang = id => {
   return dispatch => {
     dispatchLoading(dispatch, GET_LIST_KERANJANG);
 
-    // FIREBASE.database()
-    //   .ref('keranjangs/' + id)
-    //   .once('value', querySnapshot => {
-    //     //Hasil
-    //     let data = querySnapshot.val();
+    FIREBASE.database()
+      .ref('keranjangs/' + id)
+      .once('value', querySnapshot => {
+        //Hasil
+        let data = querySnapshot.val();
 
-    //     dispatchSuccess(dispatch, GET_LIST_KERANJANG, data);
-    //   })
-    //   .catch(error => {
-    //     dispatchError(dispatch, GET_LIST_KERANJANG, error);
-    //     alert(error);
-    //   });
+        dispatchSuccess(dispatch, GET_LIST_KERANJANG, data);
+      })
+      .catch(error => {
+        dispatchError(dispatch, GET_LIST_KERANJANG, error);
+        alert(error);
+      });
   };
 };
 
@@ -118,59 +110,56 @@ export const deleteKeranjang = (id, keranjangUtama, keranjang) => {
 
     const totalHargaBaru = keranjangUtama.totalHarga - keranjang.totalHarga;
 
-    const totalBeratBaru = keranjangUtama.totalBerat - keranjang.totalBerat;
-
-    // if (totalHargaBaru === 0) {
-    // hapus keranjang utama & detail
-    //   FIREBASE.database()
-    //     .ref('keranjangs')
-    //     .child(keranjangUtama.user)
-    //     .remove()
-    //     .then(response => {
-    //       dispatchSuccess(
-    //         dispatch,
-    //         DELETE_KERANJANG,
-    //         'Keranjang Sukses Dihapus',
-    //       );
-    //     })
-    //     .catch(error => {
-    //       dispatchError(dispatch, DELETE_KERANJANG, error);
-    //       alert(error);
-    //     });
-    // } else {
-    //   // update total harga & total berat keranjang utama
-    //   FIREBASE.database()
-    //     .ref('keranjangs')
-    //     .child(keranjangUtama.user)
-    //     .update({
-    //       totalBerat: totalBeratBaru,
-    //       totalHarga: totalHargaBaru,
-    //     })
-    //     .then(response => {
-    //       // hapus pesanan/keranjang detail
-    //       dispatch(deleteKeranjangDetail(id, keranjangUtama));
-    //     })
-    //     .catch(error => {
-    //       dispatchError(dispatch, DELETE_KERANJANG, error);
-    //       alert(error);
-    //     });
-    // }
+    if (totalHargaBaru === 0) {
+      // hapus keranjang utama & detail
+      FIREBASE.database()
+        .ref('keranjangs')
+        .child(keranjangUtama.user)
+        .remove()
+        .then(response => {
+          dispatchSuccess(
+            dispatch,
+            DELETE_KERANJANG,
+            'Keranjang Sukses Dihapus',
+          );
+        })
+        .catch(error => {
+          dispatchError(dispatch, DELETE_KERANJANG, error);
+          alert(error);
+        });
+    } else {
+      // update total harga & total berat keranjang utama
+      FIREBASE.database()
+        .ref('keranjangs')
+        .child(keranjangUtama.user)
+        .update({
+          totalHarga: totalHargaBaru,
+        })
+        .then(response => {
+          // hapus pesanan/keranjang detail
+          dispatch(deleteKeranjangDetail(id, keranjangUtama));
+        })
+        .catch(error => {
+          dispatchError(dispatch, DELETE_KERANJANG, error);
+          alert(error);
+        });
+    }
   };
 };
 
 export const deleteKeranjangDetail = (id, keranjangUtama) => {
   return dispatch => {
-    // FIREBASE.database()
-    //   .ref('keranjangs/' + keranjangUtama.user)
-    //   .child('pesanans')
-    //   .child(id)
-    //   .remove()
-    //   .then(response => {
-    //     dispatchSuccess(dispatch, DELETE_KERANJANG, 'Keranjang Sukses Dihapus');
-    //   })
-    //   .catch(error => {
-    //     dispatchError(dispatch, DELETE_KERANJANG, error);
-    //     alert(error);
-    //   });
+    FIREBASE.database()
+      .ref('keranjangs/' + keranjangUtama.user)
+      .child('pesanans')
+      .child(id)
+      .remove()
+      .then(response => {
+        dispatchSuccess(dispatch, DELETE_KERANJANG, 'Keranjang Sukses Dihapus');
+      })
+      .catch(error => {
+        dispatchError(dispatch, DELETE_KERANJANG, error);
+        alert(error);
+      });
   };
 };

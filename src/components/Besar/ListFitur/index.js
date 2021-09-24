@@ -1,22 +1,37 @@
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {ActivityIndicator, StyleSheet, Text, View} from 'react-native';
 import {connect} from 'react-redux';
-import {CardFitur} from '../../Kecil';
+import {colors} from '../../../utils';
+import {CardFitur} from '../../kecil';
 
-const ListFitur = ({navigation, fitur}) => {
-  console.log('Data Fitur', fitur);
+const ListFitur = ({
+  getListFiturLoading,
+  getListFiturResult,
+  getListFiturError,
+  navigation,
+}) => {
   return (
-    <View style={styles.cont}>
-      <View style={styles.container}>
-        {fitur.map(fitur => {
+    <View style={styles.container}>
+      {getListFiturResult ? (
+        Object.keys(getListFiturResult).map(key => {
           return (
-            <View key={fitur.id}>
-              <CardFitur navigation={navigation} fitur={fitur} key={fitur.id} />
-              <Text style={styles.text}>{fitur.nama}</Text>
-            </View>
+            <CardFitur
+              navigation={navigation}
+              fitur={getListFiturResult[key]}
+              key={key}
+              id={key}
+            />
           );
-        })}
-      </View>
+        })
+      ) : getListFiturLoading ? (
+        <View style={styles.loading}>
+          <ActivityIndicator color={colors.primary} />
+        </View>
+      ) : getListFiturError ? (
+        <Text>{getListFiturError}</Text>
+      ) : (
+        <Text>Data Kosong</Text>
+      )}
     </View>
   );
 };
@@ -33,26 +48,7 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-  },
-  cont: {
-    backgroundColor: 'white',
-    borderBottomLeftRadius: 25,
-    borderTopRightRadius: 25,
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 8,
-    },
-    shadowOpacity: 0.44,
-    shadowRadius: 10.32,
-
-    elevation: 16,
-    padding: 23,
-    // borderRadius: 15,
-  },
-  text: {
-    marginTop: 5,
-    textAlign: 'center',
+    marginTop: 10,
   },
   loading: {
     flex: 1,

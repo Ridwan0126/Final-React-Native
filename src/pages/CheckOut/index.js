@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {Text, StyleSheet, View} from 'react-native';
+import {connect} from 'react-redux';
 import {CardAlamat, Jarak, Pilihan, Tombol} from '../../components';
 import {
   colors,
@@ -8,27 +9,26 @@ import {
   numberWithCommas,
   responsiveHeight,
 } from '../../utils';
-import {dummyPesanans, dummyProfile} from '../../data';
-import {connect} from 'react-redux';
 import {getKotaDetail, postOngkir} from '../../actions/RajaOngkirAction';
 import {couriers} from '../../data';
+import {snapTransactions} from '../../actions/PaymentActions';
 
-class ChectOut extends Component {
+class Checkout extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
       profile: false,
-      pesanan: dummyPesanans[0],
-      // ekspedisi: [],
-      totalHarga: this.props.route.params.totalHarga,
-      totalBerat: this.props.route.params.totalBerat,
-      alamat: '',
-      date: new Date().getTime(),
       ekspedisi: couriers,
       ekspedisiSelected: false,
       ongkir: 0,
       estimasi: '',
+      totalHarga: this.props.route.params.totalHarga,
+      totalBerat: this.props.route.params.totalBerat,
+      kota: '',
+      provinsi: '',
+      alamat: '',
+      date: new Date().getTime(),
     };
   }
 
@@ -74,18 +74,19 @@ class ChectOut extends Component {
       });
     }
 
-    // if(snapTransactionsResult && prevProps.snapTransactionsResult !== snapTransactionsResult) {
+    if (
+      snapTransactionsResult &&
+      prevProps.snapTransactionsResult !== snapTransactionsResult
+    ) {
+      const params = {
+        url: snapTransactionsResult.redirect_url,
+        ongkir: this.state.ongkir,
+        estimasi: this.state.estimasi,
+        order_id: 'TEST-' + this.state.date + '-' + this.state.profile.uid,
+      };
 
-    //   const params = {
-    //     url: snapTransactionsResult.redirect_url,
-    //     ongkir: this.state.ongkir,
-    //     estimasi: this.state.estimasi,
-    //     order_id: "TEST-"+this.state.date+"-"+this.state.profile.uid
-    //   }
-
-    // this.props.navigation.navigate('Midtrans', params);
-
-    // }
+      this.props.navigation.navigate('Midtrans', params);
+    }
   }
 
   ubahEkspedisi = ekspedisiSelected => {
@@ -98,66 +99,56 @@ class ChectOut extends Component {
     }
   };
 
-  // Bayar = () => {
+  Bayar = () => {
+    const {totalHarga, ongkir, profile, date} = this.state;
 
-  //   const { totalHarga, ongkir, profile, date } = this.state
+    const data = {
+      transaction_details: {
+        order_id: 'TEST-' + date + '-' + profile.uid,
+        gross_amount: parseInt(totalHarga + ongkir),
+      },
+      credit_card: {
+        secure: true,
+      },
+      customer_details: {
+        first_name: profile.nama,
+        email: profile.email,
+        phone: profile.nohp,
+      },
+    };
 
-  //   const data = {
-  //     transaction_details: {
-  //       order_id: "TEST-"+date+"-"+profile.uid,
-  //       gross_amount: parseInt(totalHarga+ongkir)
-  //     },
-  //     credit_card: {
-  //       secure: true
-  //     },
-  //     customer_details: {
-  //       first_name: profile.nama,
-  //       email: profile.email,
-  //       phone: profile.nohp
-  //     }
-  //   }
-
-  //   if(!ongkir == 0) {
-
-  //     this.props.dispatch(snapTransactions(data))
-
-  //   }else {
-  //     Alert.alert('Error', "Silahkan Ongkir Dipilih Terlebih Dahulu")
-  //   }
-
-  // }
+    this.props.dispatch(snapTransactions(data));
+  };
 
   render() {
     const {
-      profile,
       ekspedisi,
-      totalBerat,
       totalHarga,
       alamat,
       kota,
       provinsi,
       ekspedisiSelected,
       ongkir,
-      estimasi,
     } = this.state;
-    const {navigation} = this.props;
-    console.log('Profile', profile);
+    const {navigation, snapTransactionsLoading} = this.props;
     return (
-      <View style={styles.page}>
+      <View style={styles.pages}>
         <View style={styles.isi}>
-          <Text style={styles.textBold}>Apakah Alamat Ini Benar? </Text>
+          <Text style={styles.textBold}>Apakah Benar Alamat ini ?</Text>
           <CardAlamat
-            navigation={navigation}
             alamat={alamat}
             provinsi={provinsi}
             kota={kota}
+            navigation={navigation}
           />
+
           <View style={styles.totalHarga}>
-            <Text style={styles.textBolds}>Total Harga :</Text>
-            <Text style={styles.textBolds}>
+            <Text style={styles.textBold}>Total Harga :</Text>
+            <Text style={styles.textBold}>
               Rp. {numberWithCommas(totalHarga)}
             </Text>
           </View>
+
           <Pilihan
             label="Pilih Ekspedisi"
             datas={ekspedisi}
@@ -167,19 +158,14 @@ class ChectOut extends Component {
             }
           />
           <Jarak height={10} />
-          <Text style={styles.textBold}>Biaya Ongkir</Text>
-          <View style={styles.ongkir}>
-            <Text style={styles.text}>
-              Untuk Berat :{numberWithCommas(totalBerat)} kg
-            </Text>
-            <Text style={styles.textBold}>Rp. {numberWithCommas(ongkir)} </Text>
-          </View>
+
+          <Text style={styles.textBold}>Biaya Admin :</Text>
 
           <View style={styles.ongkir}>
-            <Text style={styles.text}>Estimasi Waktu</Text>
-            <Text style={styles.textBold}>{estimasi} hari</Text>
+            <Text style={styles.textBold}>Rp. {numberWithCommas(ongkir)}</Text>
           </View>
         </View>
+
         <View style={styles.footer}>
           <View style={styles.totalHarga}>
             <Text style={styles.textBold}>Total Harga :</Text>
@@ -188,12 +174,13 @@ class ChectOut extends Component {
             </Text>
           </View>
           <Tombol
-            tittle="Bayar"
+            title="Bayar"
             type="textIcon"
             fontSize={18}
             padding={responsiveHeight(15)}
-            icon="Keranjang"
-            onPress={() => this.props.navigation.navigate('CheckOut')}
+            icon="keranjang-putih"
+            onPress={() => this.Bayar()}
+            loading={snapTransactionsLoading}
           />
         </View>
       </View>
@@ -205,18 +192,20 @@ const mapStateToProps = state => ({
   getKotaDetailLoading: state.RajaOngkirReducer.getKotaDetailLoading,
   getKotaDetailResult: state.RajaOngkirReducer.getKotaDetailResult,
   getKotaDetailError: state.RajaOngkirReducer.getKotaDetailError,
+
   ongkirResult: state.RajaOngkirReducer.ongkirResult,
-  // snapTransactionsResult: state.PaymentReducer.snapTransactionsResult,
-  // snapTransactionsLoading: state.PaymentReducer.snapTransactionsLoading
+
+  snapTransactionsResult: state.PaymentReducer.snapTransactionsResult,
+  snapTransactionsLoading: state.PaymentReducer.snapTransactionsLoading,
 });
 
-export default connect(mapStateToProps, null)(ChectOut);
+export default connect(mapStateToProps, null)(Checkout);
 
 const styles = StyleSheet.create({
-  page: {
-    backgroundColor: colors.white,
+  pages: {
     flex: 1,
-    paddingTop: 25,
+    backgroundColor: colors.white,
+    paddingTop: 30,
     justifyContent: 'space-between',
   },
   isi: {
@@ -226,14 +215,14 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontFamily: fonts.primary.bold,
   },
+  text: {
+    fontSize: 18,
+    fontFamily: fonts.primary.regular,
+  },
   totalHarga: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     marginVertical: 20,
-  },
-  textBolds: {
-    fontSize: 20,
-    fontFamily: fonts.primary.bold,
   },
   ongkir: {
     flexDirection: 'row',

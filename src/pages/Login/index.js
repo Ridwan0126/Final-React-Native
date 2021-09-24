@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
-import {StyleSheet, View, Text, Alert} from 'react-native';
+import {Alert, StyleSheet, Text, View} from 'react-native';
 import {Logo} from '../../assets';
 import {Inputan, Jarak, Tombol} from '../../components';
-import {colors, fonts, responsiveHeight, responsiveWidth} from '../../utils';
+import {colors, fonts, responsiveHeight} from '../../utils';
 import {loginUser} from '../../actions/AuthAction';
 import {connect} from 'react-redux';
 
@@ -18,18 +18,18 @@ class Login extends Component {
 
   login = () => {
     const {email, password} = this.state;
-    console.log('loggggg', email, password);
+
     if (email && password) {
+      //action
       this.props.dispatch(loginUser(email, password));
-      console.log('login', loginUser);
     } else {
-      Alert.alert('Error', 'Guys!! Udah Bener Belom? Benerin Dulu Dong!');
+      Alert.alert('Error', 'Email & Password harus diisi');
     }
   };
 
   componentDidUpdate(prevProps) {
     const {loginResult} = this.props;
-    console.log('logggggiiinnnnnn', loginResult);
+
     if (loginResult && prevProps.loginResult !== loginResult) {
       this.props.navigation.replace('MainApp');
     }
@@ -37,14 +37,12 @@ class Login extends Component {
 
   render() {
     const {email, password} = this.state;
-    console.log('loggggg11112344', email, password);
     const {loginLoading} = this.props;
 
     return (
       <View style={styles.pages}>
         <View style={styles.logo}>
           <Logo />
-          <Text style={styles.textBlues}> Sign In </Text>
         </View>
         <View style={styles.cardLogin}>
           <Inputan
@@ -60,22 +58,21 @@ class Login extends Component {
           />
           <Jarak height={25} />
           <Tombol
-            tittle="Login"
+            title="Login"
             type="text"
             padding={12}
-            fontSize={19}
+            fontSize={18}
             loading={loginLoading}
             onPress={() => this.login()}
           />
         </View>
+
         <View style={styles.register}>
-          <Text style={styles.textBlack}>
-            Belum Punya Akun ?
-            <Text
-              style={styles.textBlue}
-              onPress={() => this.props.navigation.navigate('Register1')}>
-              Sign Up
-            </Text>
+          <Text style={styles.textBlue}>Belum Punya Akun ?</Text>
+          <Text
+            style={styles.textBlue}
+            onPress={() => this.props.navigation.navigate('Register1')}>
+            Klik Untuk Daftar
           </Text>
         </View>
       </View>
@@ -96,10 +93,14 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: colors.white,
   },
+  ilustrasi: {
+    position: 'absolute',
+    bottom: 0,
+    right: -100,
+  },
   logo: {
     alignItems: 'center',
-    marginTop: responsiveHeight(40),
-    marginBottom: 20,
+    marginTop: responsiveHeight(70),
   },
   cardLogin: {
     backgroundColor: colors.white,
@@ -107,12 +108,12 @@ const styles = StyleSheet.create({
     shadowColor: '#000',
     shadowOffset: {
       width: 0,
-      height: 6,
+      height: 2,
     },
-    shadowOpacity: 0.39,
-    shadowRadius: 8.3,
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
 
-    elevation: 13,
+    elevation: 5,
     padding: 30,
     borderRadius: 10,
     marginTop: 10,
@@ -122,19 +123,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   textBlue: {
-    fontSize: 20,
-    fontFamily: fonts.primary.bold,
-    color: colors.primary,
-  },
-  textBlack: {
     fontSize: 18,
-    fontFamily: fonts.primary.bold,
-    color: 'black',
-    paddingLeft: 5,
-  },
-  textBlues: {
-    marginTop: 20,
-    fontSize: 30,
     fontFamily: fonts.primary.bold,
     color: colors.primary,
   },

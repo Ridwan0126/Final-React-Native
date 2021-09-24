@@ -1,6 +1,6 @@
 import React from 'react';
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import {Kanan, Kembali, Keranjang, Kembali2} from '../../../assets/Icons';
+import {Keranjang, Kembali, Kanan} from '../../../assets';
 import {colors} from '../../../utils';
 import TextIcon from './TextIcon';
 import TextOnly from './TextOnly';
@@ -8,18 +8,20 @@ import TombolLoading from './TombolLoading';
 
 const Tombol = props => {
   const Icon = () => {
-    if (icon === 'Keranjang') {
+    if (icon === 'keranjang') {
       return <Keranjang />;
-    } else if (icon === 'Kembali') {
+    } else if (icon === 'arrow-left') {
       return <Kembali />;
-    } else if (icon === 'KembaliHitam') {
-      return <Kembali2 />;
+    } else if (icon === 'submit') {
+      return <Kanan />;
     }
+
     return <Keranjang />;
   };
 
-  const {loading, onPress, icon, totalKeranjang, padding, type, tittle} = props;
+  const {icon, totalKeranjang, padding, type, onPress, loading} = props;
 
+  //Loading
   if (loading) {
     return <TombolLoading {...props} />;
   }
@@ -28,13 +30,12 @@ const Tombol = props => {
     return <TextOnly {...props} />;
   } else if (type === 'textIcon') {
     return <TextIcon {...props} />;
-  } else if (icon === 'submit') {
-    return <Kanan />;
   }
 
   return (
     <TouchableOpacity style={styles.container(padding)} onPress={onPress}>
       <Icon />
+
       {totalKeranjang && (
         <View style={styles.notif}>
           <Text style={styles.textNotif}>{totalKeranjang}</Text>
@@ -47,14 +48,20 @@ const Tombol = props => {
 export default Tombol;
 
 const styles = StyleSheet.create({
-  container: padding => ({padding: padding}),
+  container: padding => ({
+    padding: padding,
+    borderRadius: 5,
+  }),
   notif: {
     position: 'absolute',
     top: 5,
     right: 5,
     backgroundColor: 'red',
-    borderRadius: 10,
-    padding: 5,
+    borderRadius: 3,
+    padding: 3,
   },
-  textNotif: {fontSize: 10, color: colors.white},
+  textNotif: {
+    fontSize: 8,
+    color: colors.white,
+  },
 });

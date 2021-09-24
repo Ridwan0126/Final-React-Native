@@ -3,14 +3,13 @@ import {StyleSheet, Text, TextInput, View} from 'react-native';
 import {colors, fonts} from '../../../utils';
 
 const Inputan = ({
-  value,
   textarea,
-  textareas,
   width,
-  label,
   height,
   fontSize,
   placeholder,
+  label,
+  value,
   secureTextEntry,
   keyboardType,
   onChangeText,
@@ -18,8 +17,8 @@ const Inputan = ({
 }) => {
   if (textarea) {
     return (
-      <View>
-        <Text>{label} :</Text>
+      <View style={styles.container}>
+        <Text style={styles.label(fontSize)}>{label} :</Text>
         <TextInput
           style={styles.inputTextArea(fontSize)}
           multiline={true}
@@ -31,27 +30,13 @@ const Inputan = ({
       </View>
     );
   }
-  if (textareas) {
-    return (
-      <View style={styles.container}>
-        <Text style={styles.label(fontSize)}>{label} :</Text>
-        <TextInput
-          value={value}
-          style={styles.inputsss(width, height, fontSize)}
-          keyboardType={keyboardType}
-          onChangeText={onChangeText}
-          editable={disabled ? false : true}
-        />
-      </View>
-    );
-  }
   return (
     <View style={styles.container}>
       <Text style={styles.label(fontSize)}>{label} :</Text>
       <TextInput
-        secureTextEntry={secureTextEntry}
-        value={value}
         style={styles.input(width, height, fontSize)}
+        value={value}
+        secureTextEntry={secureTextEntry}
         keyboardType={keyboardType}
         onChangeText={onChangeText}
         editable={disabled ? false : true}
@@ -70,22 +55,11 @@ const styles = StyleSheet.create({
     fontSize: fontSize ? fontSize : 18,
     fontFamily: fonts.primary.regular,
   }),
-  input: (fontSize, width, height) => ({
+  input: (width, height, fontSize) => ({
     fontSize: fontSize ? fontSize : 18,
+    fontFamily: fonts.primary.regular,
     width: width,
     height: height,
-    fontFamily: fonts.primary.regular,
-    borderWidth: 1,
-    borderRadius: 5,
-    borderColor: colors.border,
-    paddingVertical: 5,
-    paddingHorizontal: 10,
-  }),
-  inputsss: (fontSize, width, height) => ({
-    width: 100,
-    height: 30,
-    fontSize: fontSize ? fontSize : 18,
-    fontFamily: fonts.primary.regular,
     borderWidth: 1,
     borderRadius: 5,
     borderColor: colors.border,

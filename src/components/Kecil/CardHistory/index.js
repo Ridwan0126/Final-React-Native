@@ -1,69 +1,89 @@
-import React from 'react';
-import {Image, StyleSheet, Text, View} from 'react-native';
+import React, {Component} from 'react';
+import {StyleSheet, Text, View, Alert, TouchableOpacity} from 'react-native';
+import {connect} from 'react-redux';
 import {colors, fonts, numberWithCommas, responsiveWidth} from '../../../utils';
 import Jarak from '../Jarak';
+import {updateStatus} from '../../../actions/HistoryAction';
 
-const CardHistory = ({pesanan}) => {
-  console.log('DATA DI CARD PRODUCT API ====>', pesanan);
-  return (
-    <View key={pesanan.id} style={styles.container}>
-      <View style={styles.history}>
-        <Text style={styles.Judul}>{pesanan.id}. </Text>
-        <Text style={styles.Judul}>Pembayaran Pajak Bumi dan Bangunan</Text>
-      </View>
-      <View style={styles.header}>
-        <Text style={styles.title}>Atas Nama</Text>
-        <Text style={styles.subTitle}>{pesanan.nama}</Text>
-        <Text style={styles.title}>Nomor NOP</Text>
-        <Text style={styles.subTitle}>{pesanan.nop}</Text>
-        <Text style={styles.title}>Jenis Pajak</Text>
-        <Text style={styles.subTitle}>{pesanan.jenis}</Text>
-        <Text style={styles.title}>Alamat Tinggal</Text>
-        <Text style={styles.subTitle}>{pesanan.alamat}</Text>
-        <Text style={styles.title}>Alamat Objek Pajak</Text>
-        <Text style={styles.subTitle}>{pesanan.objek}</Text>
-        <Text style={styles.title}>Tahun Pembayaran</Text>
-        <Text style={styles.subTitle}>{pesanan.tahun}</Text>
-        <Text style={styles.title}>Estimasi Pembayaran</Text>
-        <Text style={styles.subTitle}>{pesanan.estimasi}</Text>
-        <Text style={styles.title}>Jatuh Tempo</Text>
-        <Text style={styles.subTitle}>{pesanan.tempo}</Text>
-        <View style={styles.garis} />
-      </View>
-      <View style={styles.footer}>
-        <View style={styles.label}>
-          <Text style={styles.textBlue}>Keterlambatan :</Text>
-          <Text style={styles.textBlue}>Jumlah Tertagih :</Text>
-          <Text style={styles.textBlue}>Biaya Admin :</Text>
-          <Text style={styles.textBlue}>Biaya Keterlambatan :</Text>
-          <Text style={styles.textBlue}>Total Tagihan :</Text>
-          <Text style={styles.textBlue}>Status :</Text>
-        </View>
-        <View style={styles.label}>
-          <Text style={styles.textBlue}>{pesanan.telat}</Text>
-          <Text style={styles.textBlue}>
-            Rp. {numberWithCommas(pesanan.tagihan)}
-          </Text>
-          <Text style={styles.textBlue}>
-            Rp. {numberWithCommas(pesanan.admin)}
-          </Text>
-          <Text style={styles.textBlue}>
-            Rp. {numberWithCommas(pesanan.keterlambatan)}
-          </Text>
-          <Text style={styles.textBlue}>
-            Rp.{' '}
-            {numberWithCommas(
-              pesanan.tagihan + pesanan.admin + pesanan.keterlambatan,
-            )}
-          </Text>
-          <Text style={styles.textBlue}>{pesanan.status}</Text>
-        </View>
-      </View>
-    </View>
-  );
-};
+class CardHistory extends Component {
+  componentDidMount() {
+    const {pesanan} = this.props;
+    this.props.dispatch(updateStatus(pesanan.order_id));
+  }
 
-export default CardHistory;
+  masukMidtrans = () => {
+    const {pesanan} = this.props;
+    if (pesanan.status === 'lunas') {
+      Alert.alert('Info', 'Pesanan Sudah Lunas');
+    } else {
+      this.props.navigation.navigate('Midtrans', {url: pesanan.url});
+    }
+  };
+
+  render() {
+    const {pesanan, updateStatusLoading} = this.props;
+    const history = pesanan.pesanans;
+    return (
+      <TouchableOpacity
+        style={styles.container}
+        onPress={() => this.masukMidtrans()}>
+        <Text style={styles.tanggal}>{pesanan.tanggal}</Text>
+        {Object.keys(history).map((key, index) => {
+          return (
+            <View key={index} style={styles.history}>
+              <Text style={styles.textBold}>{index + 1}.</Text>
+              <View style={styles.desc}>
+                <Text style={styles.nama}>{history[key].product.nama}</Text>
+                <Text style={styles.harga}>
+                  Rp. {history[key].product.tagihan}
+                </Text>
+
+                <Jarak height={10} />
+
+                <Text style={styles.textBold}>
+                  Pesan : {history[key].jumlahPesan}
+                </Text>
+                <Text style={styles.textBold}>
+                  Total Harga : Rp. {numberWithCommas(history[key].totalHarga)}
+                </Text>
+              </View>
+            </View>
+          );
+        })}
+
+        <Jarak height={10} />
+
+        <View style={styles.footer}>
+          <View style={styles.label}>
+            <Text style={styles.textBlue}>Status :</Text>
+            <Text style={styles.textBlue}>
+              Ongkir ({pesanan.estimasi} Hari) :
+            </Text>
+            <Text style={styles.textBlue}>Total Harga :</Text>
+          </View>
+
+          <View style={styles.label}>
+            <Text style={styles.textBlue}>
+              {updateStatusLoading ? 'Loading' : pesanan.status}
+            </Text>
+            <Text style={styles.textBlue}>
+              Rp. {numberWithCommas(pesanan.ongkir)}
+            </Text>
+            <Text style={styles.textBlue}>
+              Rp. {numberWithCommas(pesanan.totalHarga + pesanan.ongkir)}
+            </Text>
+          </View>
+        </View>
+      </TouchableOpacity>
+    );
+  }
+}
+
+const mapStateToProps = state => ({
+  updateStatusLoading: state.HistoryReducer.updateStatusLoading,
+});
+
+export default connect(mapStateToProps, null)(CardHistory);
 
 const styles = StyleSheet.create({
   container: {
@@ -85,10 +105,17 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     marginTop: 10,
   },
-  Product: {
+  jersey: {
     width: responsiveWidth(66),
     height: responsiveWidth(66),
-    marginHorizontal: 5,
+  },
+  tanggal: {
+    fontSize: 14,
+    fontFamily: fonts.primary.bold,
+  },
+  textBold: {
+    fontSize: 11,
+    fontFamily: fonts.primary.bold,
   },
   desc: {
     marginLeft: responsiveWidth(7),
@@ -102,10 +129,6 @@ const styles = StyleSheet.create({
     fontSize: 12,
     fontFamily: fonts.primary.regular,
   },
-  textBold: {
-    fontSize: 11,
-    fontFamily: fonts.primary.bold,
-  },
   footer: {
     flexDirection: 'row',
   },
@@ -118,80 +141,5 @@ const styles = StyleSheet.create({
     color: colors.primary,
     textTransform: 'uppercase',
     textAlign: 'right',
-  },
-  container2: {
-    // borderRadius: 15,
-    // flexDirection: 'row',
-    // flexWrap: 'wrap',
-    justifyContent: 'space-between',
-    margin: 10,
-  },
-  loading: {
-    flex: 1,
-    marginTop: 10,
-    marginBottom: 30,
-  },
-  cont: {
-    marginTop: 10,
-    backgroundColor: 'white',
-    borderRadius: 25,
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-    elevation: 5,
-    padding: 30,
-  },
-  Judul: {
-    fontSize: 19,
-    fontFamily: fonts.primary.bold,
-  },
-  title: {
-    margin: 5,
-    backgroundColor: '#E9E9E9',
-    // fontFamily: fonts.primary.semibold,
-  },
-  subTitle: {
-    fontFamily: fonts.primary.regular,
-    textAlign: 'right',
-    margin: 5,
-  },
-  tagihan: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginTop: 7,
-  },
-  garis: {
-    borderWidth: 0.5,
-    marginVertical: 5,
-  },
-  header: {
-    marginTop: 28,
-  },
-  titles: {
-    margin: 5,
-    // backgroundColor: '#E9E9E9',
-    // fontFamily: fonts.primary.semibold,
-  },
-  tombol: {
-    backgroundColor: 'orange',
-    borderRadius: 5,
-    padding: 15,
-    margin: 8,
-    // marginVertical: 20,
-    // marginHorizontal: 10,
-  },
-  titleTombol: {
-    color: 'white',
-    textAlign: 'center',
-    fontSize: 24,
-    fontFamily: fonts.primary.bold,
-  },
-  rincian: {
-    fontFamily: fonts.primary.bold,
-    fontSize: 20,
   },
 });

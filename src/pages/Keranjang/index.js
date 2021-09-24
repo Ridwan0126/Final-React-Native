@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import {Text, StyleSheet, View} from 'react-native';
-import {dummyPesanans} from '../../data/dummyPesanan';
 import {ListKeranjang, Tombol} from '../../components';
 import {
   colors,
@@ -50,6 +49,7 @@ class Keranjang extends Component {
       <View style={styles.page}>
         <ListKeranjang {...this.props} />
         <View style={styles.footer}>
+          {/* Total Harga  */}
           <View style={styles.totalHarga}>
             <Text style={styles.textBold}>Total Harga :</Text>
             <Text style={styles.textBold}>
@@ -59,13 +59,15 @@ class Keranjang extends Component {
                 : 0}
             </Text>
           </View>
+
+          {/* Tombol  */}
           {getListKeranjangResult ? (
             <Tombol
-              tittle="Check Out"
+              title="Check Out"
               type="textIcon"
               fontSize={18}
               padding={responsiveHeight(15)}
-              icon="keranjang"
+              icon="keranjang-putih"
               onPress={() =>
                 this.props.navigation.navigate('Checkout', {
                   totalHarga: getListKeranjangResult.totalHarga,
@@ -75,22 +77,14 @@ class Keranjang extends Component {
             />
           ) : (
             <Tombol
-              tittle="Check Out"
+              title="Check Out"
               type="textIcon"
               fontSize={18}
               padding={responsiveHeight(15)}
-              icon="keranjang"
+              icon="keranjang-putih"
               disabled={true}
             />
           )}
-          {/* <Tombol
-            tittle="Check Out"
-            type="textIcon"
-            fontSize={18}
-            padding={responsiveHeight(15)}
-            icon="Keranjang"
-            onPress={() => this.props.navigation.navigate('CheckOut')}
-          /> */}
         </View>
       </View>
     );

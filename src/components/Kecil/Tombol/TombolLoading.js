@@ -5,23 +5,15 @@ import {
   Text,
   TouchableOpacity,
 } from 'react-native';
-import {Kanan, Kembali, Keranjang, Kembali2} from '../../../assets/Icons';
 import {colors, fonts} from '../../../utils';
 import Jarak from '../Jarak';
 
-const TombolLoading = ({
-  onPress,
-  icon,
-  padding,
-  tittle,
-  fontSize,
-  disabled,
-}) => {
+const TombolLoading = ({padding, fontSize}) => {
   return (
-    <TouchableOpacity style={styles.container(disabled, padding)}>
-      <ActivityIndicator size="small" color="#FFFF" />
+    <TouchableOpacity style={styles.container(padding)}>
+      <ActivityIndicator size="small" color="#FFFFFF" />
       <Jarak width={5} />
-      <Text style={styles.title(fontSize)}>Loading . . ..</Text>
+      <Text style={styles.title(fontSize)}>Loading . . .</Text>
     </TouchableOpacity>
   );
 };
@@ -29,14 +21,13 @@ const TombolLoading = ({
 export default TombolLoading;
 
 const styles = StyleSheet.create({
-  container: (padding, disabled) => ({
-    backgroundColor: colors.primary,
+  container: padding => ({
+    backgroundColor: colors.border,
     padding: padding,
     borderRadius: 5,
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: 20,
   }),
   title: fontSize => ({
     color: colors.white,

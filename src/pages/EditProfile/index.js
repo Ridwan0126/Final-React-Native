@@ -1,8 +1,5 @@
 import React, {Component} from 'react';
 import {Text, StyleSheet, View, ScrollView, Image, Alert} from 'react-native';
-import {connect} from 'react-redux';
-import {Inputan, Pilihan, Tombol} from '../../components';
-import {dummyProfile} from '../../data';
 import {
   colors,
   fonts,
@@ -10,9 +7,11 @@ import {
   responsiveHeight,
   responsiveWidth,
 } from '../../utils';
+import {Inputan, Pilihan, Tombol} from '../../components';
+import {connect} from 'react-redux';
 import {getKotaList, getProvinsiList} from '../../actions/RajaOngkirAction';
-import {Default} from '../../assets';
-import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
+import {DefaultImage} from '../../assets';
+import {launchImageLibrary} from 'react-native-image-picker';
 import {updateProfile} from '../../actions/ProfileAction';
 
 class EditProfile extends Component {
@@ -20,12 +19,13 @@ class EditProfile extends Component {
     super(props);
 
     this.state = {
+      uid: '',
       nama: '',
       email: '',
       nohp: '',
-      Provinsi: false,
-      Kota: false,
-      uid: '',
+      alamat: '',
+      provinsi: false,
+      kota: false,
       avatar: false,
       avatarForDB: '',
       avatarLama: '',
@@ -81,8 +81,8 @@ class EditProfile extends Component {
     launchImageLibrary(
       {
         quality: 1,
-        Width: 500,
-        Height: 500,
+        maxWidth: 500,
+        maxHeight: 500,
         includeBase64: true,
         selectionLimit: 1,
         cameraType: 'front',
@@ -115,40 +115,13 @@ class EditProfile extends Component {
   };
 
   render() {
-    const {
-      dataKota,
-      dataProvinsi,
-      profile,
-      nama,
-      email,
-      alamat,
-      nohp,
-      provinsi,
-      kota,
-      avatar,
-    } = this.state;
+    const {nama, email, alamat, nohp, provinsi, kota, avatar} = this.state;
 
     const {getKotaResult, getProvinsiResult, updateProfileLoading} = this.props;
 
     return (
-      <View style={styles.page}>
+      <View style={styles.pages}>
         <ScrollView showsVerticalScrollIndicator={false}>
-          <View style={styles.inputFoto}>
-            <View style={styles.wrapperUpload}>
-              <Image
-                source={avatar ? {uri: avatar} : Default}
-                style={styles.foto}
-              />
-            </View>
-            <View style={styles.tombolChangePhoto}>
-              <Tombol
-                tittle="Change-Foto"
-                type="text"
-                padding={5}
-                onPress={() => this.getImage()}
-              />
-            </View>
-          </View>
           <Inputan
             label="Nama"
             value={nama}
@@ -156,7 +129,7 @@ class EditProfile extends Component {
           />
           <Inputan label="Email" value={email} disabled />
           <Inputan
-            label="No.Hp"
+            label="No. Handphone"
             value={nohp}
             onChangeText={nohp => this.setState({nohp})}
             keyboardType="number-pad"
@@ -167,6 +140,7 @@ class EditProfile extends Component {
             onChangeText={alamat => this.setState({alamat})}
             textarea
           />
+
           <Pilihan
             label="Provinsi"
             datas={getProvinsiResult ? getProvinsiResult : []}
@@ -179,14 +153,35 @@ class EditProfile extends Component {
             selectedValue={kota}
             onValueChange={kota => this.setState({kota: kota})}
           />
+
+          <View style={styles.inputFoto}>
+            <Text style={styles.label}>Foto Profile :</Text>
+
+            <View style={styles.wrapperUpload}>
+              <Image
+                source={avatar ? {uri: avatar} : DefaultImage}
+                style={styles.foto}
+              />
+
+              <View style={styles.tombolChangePhoto}>
+                <Tombol
+                  title="Change Photo"
+                  type="text"
+                  padding={7}
+                  onPress={() => this.getImage()}
+                />
+              </View>
+            </View>
+          </View>
+
           <View style={styles.submit}>
             <Tombol
               loading={updateProfileLoading}
-              tittle="Submit"
+              title="Submit"
               type="textIcon"
               icon="submit"
-              padding={responsiveHeight(20)}
-              fontSize={20}
+              padding={responsiveHeight(15)}
+              fontSize={18}
               onPress={() => this.onSubmit()}
             />
           </View>
@@ -208,7 +203,7 @@ const mapStateToProps = state => ({
 export default connect(mapStateToProps, null)(EditProfile);
 
 const styles = StyleSheet.create({
-  page: {
+  pages: {
     flex: 1,
     backgroundColor: colors.white,
     paddingHorizontal: 30,
@@ -216,23 +211,23 @@ const styles = StyleSheet.create({
   },
   inputFoto: {
     marginTop: 20,
-    alignItems: 'center',
   },
   label: {
     fontSize: 18,
     fontFamily: fonts.primary.regular,
+  },
+  foto: {
+    width: responsiveWidth(150),
+    height: responsiveWidth(150),
+    borderRadius: 40,
   },
   wrapperUpload: {
     flexDirection: 'row',
     marginTop: 10,
     alignItems: 'center',
   },
-  foto: {
-    width: responsiveHeight(150),
-    height: responsiveWidth(150),
-    borderRadius: 100,
-  },
   tombolChangePhoto: {
+    marginLeft: 20,
     flex: 1,
   },
   submit: {

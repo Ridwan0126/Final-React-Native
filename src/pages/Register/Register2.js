@@ -3,17 +3,15 @@ import {
   Text,
   StyleSheet,
   View,
-  TouchableWithoutFeedback,
   KeyboardAvoidingView,
-  Platform,
+  TouchableWithoutFeedback,
   Keyboard,
   ScrollView,
   Alert,
 } from 'react-native';
-import {Reg1, Reg2} from '../../assets';
 import {colors, fonts, responsiveWidth} from '../../utils';
+import {Reg2} from '../../assets';
 import {Inputan, Jarak, Pilihan, Tombol} from '../../components';
-import {dummyProfile} from '../../data';
 import {connect} from 'react-redux';
 import {getProvinsiList, getKotaList} from '../../actions/RajaOngkirAction';
 import {registerUser} from '../../actions/AuthAction';
@@ -26,9 +24,9 @@ class Register2 extends Component {
       alamat: '',
       kota: false,
       provinsi: false,
-      profile: dummyProfile,
     };
   }
+
   componentDidMount() {
     this.props.dispatch(getProvinsiList());
   }
@@ -37,20 +35,21 @@ class Register2 extends Component {
     const {registerResult} = this.props;
 
     if (registerResult && prevProps.registerResult !== registerResult) {
-      this.props.navigation.replace('Profile');
+      this.props.navigation.replace('MainApp');
     }
   }
 
-  ubahProvinsi = provinsi_id => {
+  ubahProvinsi = provinsi => {
     this.setState({
-      provinsi: provinsi_id,
+      provinsi: provinsi,
     });
-    this.props.dispatch(getKotaList(provinsi_id));
+
+    this.props.dispatch(getKotaList(provinsi));
   };
 
   onContinue = () => {
-    // this.props.navigation.navigate('MainApp')
     const {kota, provinsi, alamat} = this.state;
+
     if (kota && provinsi && alamat) {
       const data = {
         nama: this.props.route.params.nama,
@@ -61,18 +60,18 @@ class Register2 extends Component {
         kota: kota,
         status: 'user',
       };
+
+      //ke Auth Action
       this.props.dispatch(registerUser(data, this.props.route.params.password));
-      console.log('DATA REG 2', data);
-      this.props.navigation.replace('MainApp');
     } else {
-      Alert.alert('Error', 'Alamat, Kota dan Provinsi Wajib Untuk di Isi');
+      Alert.alert('Error', 'Alamat, Kota, dan Provinsi harus diisi');
     }
   };
 
   render() {
     const {kota, provinsi, alamat} = this.state;
     const {getProvinsiResult, getKotaResult, registerLoading} = this.props;
-    console.log('Parameter', this.props.route.params);
+
     return (
       <KeyboardAvoidingView
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
@@ -81,14 +80,24 @@ class Register2 extends Component {
           <ScrollView showsVerticalScrollIndicator={false}>
             <View style={styles.btnBack}>
               <Tombol
-                icon="KembaliHitam"
+                icon="arrow-left"
                 onPress={() => this.props.navigation.goBack()}
               />
             </View>
+
             <View style={styles.ilustrasi}>
               <Reg2 />
-              <Text style={styles.title}> Sign Up </Text>
+              <Jarak height={5} />
+              <Text style={styles.title}>Isi Alamat</Text>
+              <Text style={styles.title}>Lengkap Anda</Text>
+
+              <View style={styles.wrapperCircle}>
+                <View style={styles.circleDisabled}></View>
+                <Jarak width={10} />
+                <View style={styles.circlePrimary}></View>
+              </View>
             </View>
+
             <View style={styles.card}>
               <Inputan
                 label="Alamat"
@@ -96,11 +105,12 @@ class Register2 extends Component {
                 onChangeText={alamat => this.setState({alamat})}
                 value={alamat}
               />
+
               <Pilihan
                 label="Provinsi"
                 datas={getProvinsiResult ? getProvinsiResult : []}
                 selectedValue={provinsi}
-                onValueChange={provinsi_id => this.ubahProvinsi(provinsi_id)}
+                onValueChange={provinsi => this.ubahProvinsi(provinsi)}
               />
               <Pilihan
                 label="Kota/Kab"
@@ -108,23 +118,17 @@ class Register2 extends Component {
                 selectedValue={kota}
                 onValueChange={kota => this.setState({kota: kota})}
               />
-              <Jarak height={20} />
+
+              <Jarak height={25} />
               <Tombol
-                tittle="Submit"
+                title="Continue"
                 type="textIcon"
                 icon="submit"
-                padding={15}
-                fontSize={24}
+                padding={10}
+                fontSize={18}
                 onPress={() => this.onContinue()}
                 loading={registerLoading}
               />
-            </View>
-            <View style={styles.ilustrasi}>
-              <View style={styles.wrapperCircle}>
-                <View style={styles.circleDisabled}></View>
-                <Jarak width={10} />
-                <View style={styles.circlePrimary}></View>
-              </View>
             </View>
           </ScrollView>
         </TouchableWithoutFeedback>
@@ -132,6 +136,7 @@ class Register2 extends Component {
     );
   }
 }
+
 const mapStateToProps = state => ({
   getProvinsiResult: state.RajaOngkirReducer.getProvinsiResult,
   getKotaResult: state.RajaOngkirReducer.getKotaResult,
@@ -147,16 +152,15 @@ const styles = StyleSheet.create({
   page: {
     flex: 1,
     backgroundColor: colors.white,
-    paddingTop: 30,
+    paddingTop: 20,
   },
   ilustrasi: {
     alignItems: 'center',
   },
   title: {
-    fontSize: 30,
-    fontFamily: fonts.primary.bold,
+    fontSize: 24,
+    fontFamily: fonts.primary.light,
     color: colors.primary,
-    marginTop: 15,
   },
   wrapperCircle: {
     flexDirection: 'row',
@@ -180,21 +184,21 @@ const styles = StyleSheet.create({
     shadowColor: '#000',
     shadowOffset: {
       width: 0,
-      height: 6,
+      height: 2,
     },
-    shadowOpacity: 0.39,
-    shadowRadius: 8.3,
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
 
-    elevation: 13,
+    elevation: 5,
     paddingHorizontal: 30,
     paddingBottom: 20,
     paddingTop: 10,
     borderRadius: 10,
-    marginTop: 15,
+    marginTop: 10,
     marginBottom: 10,
   },
   btnBack: {
-    marginLeft: 20,
+    marginLeft: 30,
     position: 'absolute',
   },
 });

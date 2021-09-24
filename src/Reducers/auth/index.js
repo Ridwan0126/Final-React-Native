@@ -27,7 +27,6 @@ export default function (state = initialState, action) {
         loginResult: action.payload.data,
         loginError: action.payload.errorMessage,
       };
-
     default:
       return state;
   }

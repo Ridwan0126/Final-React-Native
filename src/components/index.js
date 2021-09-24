@@ -1,2 +1,2 @@
-export * from './Besar';
-export * from './Kecil';
+export * from './besar'
+export * from './kecil'

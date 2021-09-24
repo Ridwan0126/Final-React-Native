@@ -1,20 +1,14 @@
 import React from 'react';
-import {
-  ActivityIndicator,
-  ScrollView,
-  StyleSheet,
-  Text,
-  View,
-} from 'react-native';
-import {CardKeranjang} from '../../Kecil';
+import {ActivityIndicator, StyleSheet, Text, View} from 'react-native';
+import {ScrollView} from 'react-native-gesture-handler';
 import {colors} from '../../../utils';
+import {CardKeranjang} from '../../kecil';
 
 const ListKeranjang = ({
   getListKeranjangLoading,
   getListKeranjangResult,
   getListKeranjangError,
 }) => {
-  console.log('Keranjang Result', getListKeranjangResult);
   return (
     <ScrollView showsVerticalScrollIndicator={false}>
       <View style={styles.container}>
@@ -49,7 +43,7 @@ const styles = StyleSheet.create({
   container: {
     marginVertical: 10,
   },
-  ading: {
+  loading: {
     flex: 1,
     marginTop: 10,
     marginBottom: 30,

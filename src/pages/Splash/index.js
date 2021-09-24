@@ -5,7 +5,7 @@ import {Logo} from '../../assets';
 export default class Splash extends Component {
   componentDidMount() {
     setTimeout(() => {
-      this.props.navigation.navigate('MainApp');
+      this.props.navigation.replace('MainApp');
     }, 3000);
   }
 
@@ -24,5 +24,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: 'white',
+  },
+  ilustrasi: {
+    position: 'absolute',
+    bottom: 0,
+    right: 0,
   },
 });

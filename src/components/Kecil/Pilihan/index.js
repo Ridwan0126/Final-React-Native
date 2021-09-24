@@ -4,19 +4,18 @@ import {colors, fonts, responsiveHeight} from '../../../utils';
 import {Picker} from '@react-native-picker/picker';
 
 const Pilihan = ({
-  selectedValue,
-  onValueChange,
   label,
   datas,
   width,
   height,
   fontSize,
+  selectedValue,
+  onValueChange,
 }) => {
-  console.log('Datas', datas);
   return (
     <View style={styles.container}>
       <Text style={styles.label(fontSize)}>{label} :</Text>
-      <View style={styles.wrap}>
+      <View style={styles.wrapperPicker}>
         <Picker
           selectedValue={selectedValue}
           style={styles.picker(width, height, fontSize)}
@@ -63,11 +62,6 @@ const styles = StyleSheet.create({
     fontSize: fontSize ? fontSize : 18,
     fontFamily: fonts.primary.regular,
   }),
-  wrap: {
-    borderWidth: 1,
-    borderRadius: 5,
-    borderColor: colors.border,
-  },
   picker: (width, height, fontSize) => ({
     fontSize: fontSize ? fontSize : 18,
     fontFamily: fonts.primary.regular,
@@ -76,4 +70,9 @@ const styles = StyleSheet.create({
     marginTop: -10,
     marginBottom: 10,
   }),
+  wrapperPicker: {
+    borderWidth: 1,
+    borderRadius: 5,
+    borderColor: colors.border,
+  },
 });
